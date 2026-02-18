@@ -296,32 +296,58 @@ width:30px;
 height:30px;
 }
 
-/* GLOW */
-.instagram.glow{
-box-shadow:0 0 30px rgba(214,41,118,0.6),
-           0 0 60px rgba(214,41,118,0.4);
-animation:glowPulse 1.8s infinite alternate;
-}
+/* ===============================
+   RESPONSIVE
+================================= */
 
-@keyframes glowPulse{
-from{transform:scale(1);}
-to{transform:scale(1.08);}
+@media (max-width:1024px){
+.hero-title{font-size:48px;}
+section{padding:120px 8%;}
+.navbar{padding:20px 8%;}
 }
-
-/* RESPONSIVE */
 
 @media (max-width:768px){
+
 .hero-title{font-size:34px;}
 .cursor{height:40px;}
 .sub{font-size:16px;}
 .btn{padding:16px 40px;font-size:14px;}
+
+.navbar{
+flex-direction:column;
+gap:15px;
+padding:20px;
+}
+
+.nav-links{
+gap:20px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
 section{padding:100px 6%;}
+.section-title{font-size:32px;}
+
+.chi-lead{font-size:18px;}
+.chi-section p{font-size:15px;}
+
+.cards,
+.method-grid,
+.chi-values{
+grid-template-columns:1fr;
+}
+
+.step-number{font-size:50px;}
+
+.contact-box{padding:50px 25px;}
+
 .instagram{
 width:55px;
 height:55px;
 bottom:20px;
 right:20px;
 }
+
 .instagram svg{
 width:24px;
 height:24px;
@@ -332,15 +358,113 @@ height:24px;
 
 <body>
 
-<!-- QUI RESTA TUTTO IL TUO CONTENUTO IDENTICO -->
-<!-- NON HO TOCCATO NIENTE SOPRA -->
+<div class="intro" id="intro">
+<h1 class="hero-title" id="typewriter"></h1>
+<div class="cursor"></div>
+<p class="sub" id="subtitle">
+Siti web, landing page e strutture digitali pensate per posizionare brand e aumentare conversioni.
+</p>
+<button class="btn" onclick="enterSite()">Inizia Ora</button>
+</div>
 
-<a href="https://www.instagram.com/webboostitalia"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="instagram"
-   id="instagramBtn">
+<div class="main" id="main">
 
+<div class="navbar">
+<div><strong>WebBoost Italia</strong></div>
+<div class="nav-links">
+<a href="#chi">Chi siamo</a>
+<a href="#servizi">Servizi</a>
+<a href="#metodo">Metodo</a>
+<a href="#contatti">Contatti</a>
+</div>
+</div>
+
+<section id="chi" class="fade chi-section">
+<h2 class="section-title">Chi siamo</h2>
+
+<p class="chi-lead">
+WebBoost Italia progetta ecosistemi digitali per aziende che vogliono 
+<strong class="highlight">dominare il proprio mercato</strong> e trasformare il traffico in crescita concreta.
+</p>
+
+<p>
+Non realizziamo semplici siti web, ma infrastrutture digitali strategiche progettate per aumentare autorevolezza, fiducia e conversioni.
+Ogni progetto nasce da un’analisi approfondita del mercato e del comportamento degli utenti.
+</p>
+
+<p>
+Design, psicologia della persuasione e ottimizzazione continua lavorano insieme per creare piattaforme che generano risultati misurabili.
+</p>
+
+<div class="chi-values">
+<div class="chi-box">
+<h3>Visione Strategica</h3>
+<p>Ogni scelta è guidata da obiettivi chiari e orientati alla crescita.</p>
+</div>
+<div class="chi-box">
+<h3>Performance</h3>
+<p>Design e struttura sono sempre pensati per convertire.</p>
+</div>
+<div class="chi-box">
+<h3>Ottimizzazione Continua</h3>
+<p>Miglioriamo costantemente per massimizzare risultati e ROI.</p>
+</div>
+</div>
+</section>
+
+<section id="servizi" class="fade">
+<h2 class="section-title">Cosa proponiamo</h2>
+<div class="cards">
+<div class="card">
+<h3>Web Design Strategico</h3>
+<p>Piattaforme ad alto impatto visivo e orientate alla conversione.</p>
+</div>
+<div class="card">
+<h3>Landing & Funnel</h3>
+<p>Percorsi digitali ottimizzati per trasformare traffico in clienti.</p>
+</div>
+<div class="card">
+<h3>Brand Positioning</h3>
+<p>Costruiamo autorità e riconoscibilità nel mercato digitale.</p>
+</div>
+</div>
+</section>
+
+<section id="metodo" class="fade">
+<h2 class="section-title">Il Metodo</h2>
+<div class="method-grid">
+<div class="method-step">
+<div class="step-number">01</div>
+<h3>Analisi Strategica</h3>
+<p>Studio approfondito di mercato, competitor e target.</p>
+</div>
+<div class="method-step">
+<div class="step-number">02</div>
+<h3>Progettazione</h3>
+<p>Costruzione di ecosistemi digitali orientati alla conversione.</p>
+</div>
+<div class="method-step">
+<div class="step-number">03</div>
+<h3>Ottimizzazione</h3>
+<p>Miglioramento continuo delle performance nel tempo.</p>
+</div>
+</div>
+</section>
+
+<section id="contatti" class="fade">
+<h2 class="section-title">Contattaci</h2>
+<div class="contact-box">
+<p>Scrivici per iniziare il tuo progetto digitale.</p>
+<br>
+<a href="mailto:webboostitalia1@gmail.com">
+webboostitalia1@gmail.com
+</a>
+</div>
+</section>
+
+</div>
+
+<a href="https://instagram.com" target="_blank" class="instagram">
 <svg viewBox="0 0 24 24" fill="none">
 <path d="M7 2C4.2 2 2 4.2 2 7V17C2 19.8 4.2 22 7 22H17C19.8 22 22 19.8 22 17V7C22 4.2 19.8 2 17 2H7Z" stroke="url(#grad)" stroke-width="2"/>
 <circle cx="12" cy="12" r="4" stroke="url(#grad)" stroke-width="2"/>
@@ -353,23 +477,36 @@ height:24px;
 </linearGradient>
 </defs>
 </svg>
-
 </a>
 
 <script>
-/* ATTIVA GLOW QUANDO SI ARRIVA AI CONTATTI */
-const contactSection = document.getElementById("contatti");
-const instagramBtn = document.getElementById("instagramBtn");
+const text="Progettiamo ecosistemi digitali che generano crescita reale";
+let i=0;
+function typeWriter(){
+if(i<text.length){
+document.getElementById("typewriter").innerHTML+=text[i];
+i++;
+setTimeout(typeWriter,35);
+}else{
+document.getElementById("subtitle").classList.add("show");
+}}
+typeWriter();
 
-const instaObserver = new IntersectionObserver(entries=>{
+function enterSite(){
+document.getElementById("intro").classList.add("hide");
+document.getElementById("main").classList.add("show");
+}
+
+const observer=new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
-instagramBtn.classList.add("glow");
+entry.target.classList.add("visible");
 }
 });
-},{threshold:0.4});
+},{threshold:0.2});
 
-instaObserver.observe(contactSection);
+document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
+document.querySelectorAll(".chi-box").forEach(el=>observer.observe(el));
 </script>
 
 </body>
