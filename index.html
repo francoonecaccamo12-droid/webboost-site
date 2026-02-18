@@ -37,11 +37,6 @@ max-width:1100px;
 line-height:1.15;
 }
 
-.yellow{
-color:#facc15;
-text-shadow:0 0 20px rgba(250,204,21,0.6);
-}
-
 .cursor{
 display:inline-block;
 width:3px;
@@ -155,6 +150,54 @@ opacity:1;
 transform:translateY(0);
 }
 
+/* ---------------- CHI SIAMO ---------------- */
+
+.chi-section p{
+margin-bottom:25px;
+font-size:18px;
+color:#cbd5e1;
+line-height:1.8;
+}
+
+.chi-lead{
+font-size:22px;
+color:white;
+margin-bottom:35px;
+}
+
+.highlight{
+color:#facc15;
+text-shadow:0 0 15px rgba(250,204,21,0.5);
+}
+
+.chi-values{
+margin-top:60px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.chi-box{
+background:linear-gradient(145deg,#0f0f15,#111117);
+padding:40px;
+border-radius:25px;
+transition:.6s;
+border:1px solid rgba(255,255,255,0.05);
+transform:translateY(40px);
+opacity:0;
+}
+
+.chi-box.visible{
+transform:translateY(0);
+opacity:1;
+}
+
+.chi-box:hover{
+transform:translateY(-10px);
+border-color:#facc15;
+box-shadow:0 0 30px rgba(250,204,21,0.2);
+}
+
 /* SERVIZI */
 
 .cards{
@@ -177,7 +220,7 @@ border-color:#facc15;
 box-shadow:0 0 40px rgba(250,204,21,0.3);
 }
 
-/* METODO BLOCCO PREMIUM */
+/* METODO */
 
 .method-grid{
 display:grid;
@@ -245,9 +288,7 @@ transition:.3s;
 box-shadow:0 0 25px rgba(0,0,0,0.4);
 }
 
-.instagram:hover{
-transform:scale(1.1);
-}
+.instagram:hover{transform:scale(1.1);}
 
 .instagram svg{
 width:30px;
@@ -261,7 +302,6 @@ height:30px;
 
 <!-- INTRO -->
 <div class="intro" id="intro">
-
 <h1 class="hero-title" id="typewriter"></h1>
 <div class="cursor"></div>
 
@@ -270,7 +310,6 @@ Siti web, landing page e strutture digitali pensate per posizionare brand e aume
 </p>
 
 <button class="btn" onclick="enterSite()">Inizia Ora</button>
-
 </div>
 
 <!-- MAIN -->
@@ -286,12 +325,41 @@ Siti web, landing page e strutture digitali pensate per posizionare brand e aume
 </div>
 </div>
 
-<section id="chi" class="fade">
+<section id="chi" class="fade chi-section">
 <h2 class="section-title">Chi siamo</h2>
-<p>
-WebBoost Italia progetta ecosistemi digitali completi per aziende che vogliono dominare il proprio mercato digitale.
-Creiamo strutture strategiche progettate per generare crescita reale e misurabile.
+
+<p class="chi-lead">
+WebBoost Italia progetta ecosistemi digitali per aziende che vogliono 
+<strong class="highlight">dominare il proprio mercato</strong> e trasformare il traffico in crescita concreta.
 </p>
+
+<p>
+Non realizziamo semplici siti web, ma infrastrutture digitali strategiche progettate per aumentare autorevolezza, fiducia e conversioni.
+Ogni progetto nasce da un’analisi approfondita del mercato e del comportamento degli utenti.
+</p>
+
+<p>
+Design, psicologia della persuasione e ottimizzazione continua lavorano insieme per creare piattaforme che generano risultati misurabili.
+</p>
+
+<div class="chi-values">
+
+<div class="chi-box">
+<h3>Visione Strategica</h3>
+<p>Ogni scelta è guidata da obiettivi chiari e orientati alla crescita.</p>
+</div>
+
+<div class="chi-box">
+<h3>Performance</h3>
+<p>Design e struttura sono sempre pensati per convertire.</p>
+</div>
+
+<div class="chi-box">
+<h3>Ottimizzazione Continua</h3>
+<p>Miglioriamo costantemente per massimizzare risultati e ROI.</p>
+</div>
+
+</div>
 </section>
 
 <section id="servizi" class="fade">
@@ -314,29 +382,23 @@ Creiamo strutture strategiche progettate per generare crescita reale e misurabil
 
 <section id="metodo" class="fade">
 <h2 class="section-title">Il Metodo</h2>
-
 <div class="method-grid">
-
 <div class="method-step">
 <div class="step-number">01</div>
 <h3>Analisi Strategica</h3>
-<p>Studiamo il tuo mercato, competitor e target per creare basi solide.</p>
+<p>Studio approfondito di mercato, competitor e target.</p>
 </div>
-
 <div class="method-step">
 <div class="step-number">02</div>
 <h3>Progettazione</h3>
-<p>Costruiamo ecosistemi digitali completi e orientati alla conversione.</p>
+<p>Costruzione di ecosistemi digitali orientati alla conversione.</p>
 </div>
-
 <div class="method-step">
 <div class="step-number">03</div>
 <h3>Ottimizzazione</h3>
-<p>Miglioriamo continuamente performance e risultati nel tempo.</p>
+<p>Miglioramento continuo delle performance nel tempo.</p>
 </div>
-
 </div>
-
 </section>
 
 <section id="contatti" class="fade">
@@ -352,7 +414,6 @@ webboostitalia1@gmail.com
 
 </div>
 
-<!-- INSTAGRAM ORIGINALE SVG -->
 <a href="https://instagram.com" target="_blank" class="instagram">
 <svg viewBox="0 0 24 24" fill="none">
 <path d="M7 2C4.2 2 2 4.2 2 7V17C2 19.8 4.2 22 7 22H17C19.8 22 22 19.8 22 17V7C22 4.2 19.8 2 17 2H7Z" stroke="url(#grad)" stroke-width="2"/>
@@ -369,21 +430,16 @@ webboostitalia1@gmail.com
 </a>
 
 <script>
-
-const text = "Progettiamo ecosistemi digitali che generano crescita reale";
-const target = document.getElementById("typewriter");
-const subtitle = document.getElementById("subtitle");
-let i = 0;
-
+const text="Progettiamo ecosistemi digitali che generano crescita reale";
+let i=0;
 function typeWriter(){
-if(i < text.length){
-target.innerHTML += text[i];
+if(i<text.length){
+document.getElementById("typewriter").innerHTML+=text[i];
 i++;
-setTimeout(typeWriter, 35);
+setTimeout(typeWriter,35);
 }else{
-subtitle.classList.add("show");
-}
-}
+document.getElementById("subtitle").classList.add("show");
+}}
 typeWriter();
 
 function enterSite(){
@@ -391,7 +447,7 @@ document.getElementById("intro").classList.add("hide");
 document.getElementById("main").classList.add("show");
 }
 
-const observer = new IntersectionObserver(entries=>{
+const observer=new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
 entry.target.classList.add("visible");
@@ -400,7 +456,7 @@ entry.target.classList.add("visible");
 },{threshold:0.2});
 
 document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
-
+document.querySelectorAll(".chi-box").forEach(el=>observer.observe(el));
 </script>
 
 </body>
