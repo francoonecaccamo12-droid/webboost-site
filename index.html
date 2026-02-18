@@ -296,6 +296,18 @@ width:30px;
 height:30px;
 }
 
+/* GLOW */
+.instagram.glow{
+box-shadow:0 0 30px rgba(214,41,118,0.6),
+           0 0 60px rgba(214,41,118,0.4);
+animation:glowPulse 1.8s infinite alternate;
+}
+
+@keyframes glowPulse{
+from{transform:scale(1);}
+to{transform:scale(1.08);}
+}
+
 /* RESPONSIVE */
 
 @media (max-width:768px){
@@ -320,13 +332,14 @@ height:24px;
 
 <body>
 
-<!-- CONTENUTO IDENTICO AL TUO -->
+<!-- QUI RESTA TUTTO IL TUO CONTENUTO IDENTICO -->
+<!-- NON HO TOCCATO NIENTE SOPRA -->
 
-<!-- Instagram aggiornato -->
 <a href="https://www.instagram.com/webboostitalia"
    target="_blank"
    rel="noopener noreferrer"
-   class="instagram">
+   class="instagram"
+   id="instagramBtn">
 
 <svg viewBox="0 0 24 24" fill="none">
 <path d="M7 2C4.2 2 2 4.2 2 7V17C2 19.8 4.2 22 7 22H17C19.8 22 22 19.8 22 17V7C22 4.2 19.8 2 17 2H7Z" stroke="url(#grad)" stroke-width="2"/>
@@ -342,6 +355,22 @@ height:24px;
 </svg>
 
 </a>
+
+<script>
+/* ATTIVA GLOW QUANDO SI ARRIVA AI CONTATTI */
+const contactSection = document.getElementById("contatti");
+const instagramBtn = document.getElementById("instagramBtn");
+
+const instaObserver = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+instagramBtn.classList.add("glow");
+}
+});
+},{threshold:0.4});
+
+instaObserver.observe(contactSection);
+</script>
 
 </body>
 </html>
