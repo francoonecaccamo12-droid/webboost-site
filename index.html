@@ -5,242 +5,508 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WebBoost Italia</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#050507;color:white;overflow-x:hidden;}
+
+/* ---------------- INTRO ---------------- */
+
+.intro{
+position:fixed;
+width:100%;
+height:100vh;
+background:radial-gradient(circle at 20% 30%, #1a1400, #000 70%);
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+transition:opacity 1s ease, visibility 1s ease;
+z-index:1000;
 }
 
-body{
-    background:#0d0d0d;
-    color:white;
-    overflow-x:hidden;
+.intro.hide{opacity:0;visibility:hidden;}
+
+.hero-title{
+font-size:64px;
+font-weight:800;
+max-width:1100px;
+line-height:1.15;
 }
 
-section{
-    padding:100px 10%;
-    min-height:100vh;
+.cursor{
+display:inline-block;
+width:3px;
+height:70px;
+background:#facc15;
+margin-left:8px;
+animation:blink 1s infinite;
+vertical-align:bottom;
 }
 
-/* HERO */
+@keyframes blink{50%{opacity:0;}}
 
-.hero{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    background:linear-gradient(135deg,#0d0d0d,#1a1a1a);
+.sub{
+margin-top:40px;
+color:#cbd5e1;
+font-size:20px;
+max-width:700px;
+opacity:0;
+transform:translateY(30px);
+transition:1s ease;
 }
 
-.hero h1{
-    font-size:3rem;
-    max-width:800px;
-    line-height:1.2;
-}
-
-.typing{
-    border-right:2px solid #00f0ff;
-    white-space:nowrap;
-    overflow:hidden;
-    animation:blink 0.8s infinite;
-}
-
-@keyframes blink{
-    0%{border-color:#00f0ff;}
-    50%{border-color:transparent;}
-    100%{border-color:#00f0ff;}
-}
+.sub.show{opacity:1;transform:translateY(0);}
 
 .btn{
-    margin-top:40px;
-    padding:15px 35px;
-    border:none;
-    border-radius:30px;
-    background:#00f0ff;
-    color:black;
-    font-weight:600;
-    cursor:pointer;
-    transition:0.4s;
+margin-top:60px;
+padding:20px 60px;
+background:#facc15;
+color:black;
+font-weight:600;
+border:none;
+border-radius:50px;
+cursor:pointer;
+transition:.4s;
+box-shadow:0 0 40px rgba(250,204,21,0.6);
 }
 
 .btn:hover{
-    background:white;
+transform:scale(1.07);
+box-shadow:0 0 70px rgba(250,204,21,1);
 }
 
-/* SEZIONI */
+/* ---------------- MAIN ---------------- */
 
-h2{
-    font-size:2rem;
-    margin-bottom:30px;
+.main{
+opacity:0;
+transform:translateY(60px);
+transition:1.4s ease;
+background:#050507;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:30px;
+.main.show{opacity:1;transform:translateY(0);}
+
+/* NAVBAR */
+
+.navbar{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 10%;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(12px);
+z-index:100;
+}
+
+.nav-links{
+display:flex;
+gap:40px;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+transition:.3s;
+position:relative;
+font-size:15px;
+}
+
+.nav-links a:after{
+content:"";
+position:absolute;
+width:0;
+height:2px;
+background:#facc15;
+left:0;
+bottom:-5px;
+transition:.3s;
+}
+
+.nav-links a:hover:after{width:100%;}
+
+/* SECTIONS */
+
+section{padding:160px 10%;}
+
+.section-title{
+font-size:44px;
+margin-bottom:50px;
+}
+
+.fade{
+opacity:0;
+transform:translateY(50px);
+transition:1s ease;
+}
+
+.fade.visible{
+opacity:1;
+transform:translateY(0);
+}
+
+/* ---------------- CHI SIAMO ---------------- */
+
+.chi-section p{
+margin-bottom:25px;
+font-size:18px;
+color:#cbd5e1;
+line-height:1.8;
+}
+
+.chi-lead{
+font-size:22px;
+color:white;
+margin-bottom:35px;
+}
+
+.highlight{
+color:#facc15;
+text-shadow:0 0 15px rgba(250,204,21,0.5);
+}
+
+.chi-values{
+margin-top:60px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.chi-box{
+background:linear-gradient(145deg,#0f0f15,#111117);
+padding:40px;
+border-radius:25px;
+transition:.6s;
+border:1px solid rgba(255,255,255,0.05);
+transform:translateY(40px);
+opacity:0;
+}
+
+.chi-box.visible{
+transform:translateY(0);
+opacity:1;
+}
+
+.chi-box:hover{
+transform:translateY(-10px);
+border-color:#facc15;
+box-shadow:0 0 30px rgba(250,204,21,0.2);
+}
+
+/* SERVIZI */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:40px;
 }
 
 .card{
-    background:#1a1a1a;
-    padding:30px;
-    border-radius:20px;
-    transition:0.4s;
+background:linear-gradient(145deg,#0f0f15,#111117);
+padding:50px;
+border-radius:25px;
+transition:.5s;
+border:1px solid rgba(255,255,255,0.05);
 }
 
 .card:hover{
-    transform:translateY(-10px);
-    background:#222;
+transform:translateY(-15px) scale(1.02);
+border-color:#facc15;
+box-shadow:0 0 40px rgba(250,204,21,0.3);
 }
 
-/* CONTATTI */
+/* METODO */
 
-.contact{
-    text-align:center;
-    position:relative;
+.method-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:40px;
 }
 
-.email{
-    display:inline-block;
-    margin-top:20px;
-    font-size:1.2rem;
-    color:#00f0ff;
-    text-decoration:none;
+.method-step{
+background:linear-gradient(145deg,#0f0f15,#111117);
+padding:60px 40px;
+border-radius:30px;
+position:relative;
+transition:.5s;
+border:1px solid rgba(255,255,255,0.05);
 }
+
+.method-step:hover{
+transform:translateY(-10px);
+border-color:#facc15;
+box-shadow:0 0 40px rgba(250,204,21,0.2);
+}
+
+.step-number{
+font-size:70px;
+font-weight:800;
+color:#facc15;
+opacity:0.15;
+position:absolute;
+top:20px;
+right:30px;
+}
+
+/* CONTACT */
+
+.contact-box{
+background:linear-gradient(145deg,#0f0f15,#111117);
+padding:80px;
+border-radius:30px;
+text-align:center;
+}
+
+.contact-box a{
+color:#facc15;
+text-decoration:none;
+font-weight:600;
+font-size:20px;
+}
+
+.contact-box a:hover{text-decoration:underline;}
+
+/* INSTAGRAM */
 
 .instagram{
-    position:fixed;
-    bottom:30px;
-    right:30px;
-    font-size:35px;
-    color:white;
-    transition:0.4s;
+position:fixed;
+bottom:30px;
+right:30px;
+width:65px;
+height:65px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:white;
+transition:.3s;
+box-shadow:0 0 25px rgba(0,0,0,0.4);
 }
 
-.instagram.glow{
-    color:#E1306C;
-    animation:glow 1.5s infinite alternate;
+.instagram:hover{transform:scale(1.1);}
+
+.instagram svg{
+width:30px;
+height:30px;
 }
 
-@keyframes glow{
-    from{
-        text-shadow:0 0 5px #E1306C, 0 0 10px #E1306C;
-    }
-    to{
-        text-shadow:0 0 20px #E1306C, 0 0 40px #E1306C;
-    }
+/* ===============================
+   RESPONSIVE
+================================= */
+
+@media (max-width:1024px){
+.hero-title{font-size:48px;}
+section{padding:120px 8%;}
+.navbar{padding:20px 8%;}
 }
 
-/* RESPONSIVE */
+@media (max-width:768px){
 
-@media(max-width:768px){
-    .hero h1{
-        font-size:2rem;
-    }
+.hero-title{font-size:34px;}
+.cursor{height:40px;}
+.sub{font-size:16px;}
+.btn{padding:16px 40px;font-size:14px;}
+
+.navbar{
+flex-direction:column;
+gap:15px;
+padding:20px;
 }
 
+.nav-links{
+gap:20px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+section{padding:100px 6%;}
+.section-title{font-size:32px;}
+
+.chi-lead{font-size:18px;}
+.chi-section p{font-size:15px;}
+
+.cards,
+.method-grid,
+.chi-values{
+grid-template-columns:1fr;
+}
+
+.step-number{font-size:50px;}
+
+.contact-box{padding:50px 25px;}
+
+.instagram{
+width:55px;
+height:55px;
+bottom:20px;
+right:20px;
+}
+
+.instagram svg{
+width:24px;
+height:24px;
+}
+}
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<section class="hero">
-    <h1 id="typeText" class="typing"></h1>
-    <button class="btn" onclick="scrollToContent()">Scopri di più</button>
+<div class="intro" id="intro">
+<h1 class="hero-title" id="typewriter"></h1>
+<div class="cursor"></div>
+<p class="sub" id="subtitle">
+Siti web, landing page e strutture digitali pensate per posizionare brand e aumentare conversioni.
+</p>
+<button class="btn" onclick="enterSite()">Inizia Ora</button>
+</div>
+
+<div class="main" id="main">
+
+<div class="navbar">
+<div><strong>WebBoost Italia</strong></div>
+<div class="nav-links">
+<a href="#chi">Chi siamo</a>
+<a href="#servizi">Servizi</a>
+<a href="#metodo">Metodo</a>
+<a href="#contatti">Contatti</a>
+</div>
+</div>
+
+<section id="chi" class="fade chi-section">
+<h2 class="section-title">Chi siamo</h2>
+
+<p class="chi-lead">
+WebBoost Italia progetta ecosistemi digitali per aziende che vogliono 
+<strong class="highlight">dominare il proprio mercato</strong> e trasformare il traffico in crescita concreta.
+</p>
+
+<p>
+Non realizziamo semplici siti web, ma infrastrutture digitali strategiche progettate per aumentare autorevolezza, fiducia e conversioni.
+Ogni progetto nasce da un’analisi approfondita del mercato e del comportamento degli utenti.
+</p>
+
+<p>
+Design, psicologia della persuasione e ottimizzazione continua lavorano insieme per creare piattaforme che generano risultati misurabili.
+</p>
+
+<div class="chi-values">
+<div class="chi-box">
+<h3>Visione Strategica</h3>
+<p>Ogni scelta è guidata da obiettivi chiari e orientati alla crescita.</p>
+</div>
+<div class="chi-box">
+<h3>Performance</h3>
+<p>Design e struttura sono sempre pensati per convertire.</p>
+</div>
+<div class="chi-box">
+<h3>Ottimizzazione Continua</h3>
+<p>Miglioriamo costantemente per massimizzare risultati e ROI.</p>
+</div>
+</div>
 </section>
 
-<!-- CHI SIAMO -->
-<section>
-    <h2>Chi siamo</h2>
-    <p>
-        WebBoost Italia è un’agenzia digitale specializzata nella crescita online per ogni tipo di business.
-        Creiamo siti web professionali, funnel di vendita e strategie di marketing digitale progettate
-        per aumentare clienti e fatturato.
-        Non vendiamo semplici siti, costruiamo sistemi digitali che generano risultati concreti.
-    </p>
+<section id="servizi" class="fade">
+<h2 class="section-title">Cosa proponiamo</h2>
+<div class="cards">
+<div class="card">
+<h3>Web Design Strategico</h3>
+<p>Piattaforme ad alto impatto visivo e orientate alla conversione.</p>
+</div>
+<div class="card">
+<h3>Landing & Funnel</h3>
+<p>Percorsi digitali ottimizzati per trasformare traffico in clienti.</p>
+</div>
+<div class="card">
+<h3>Brand Positioning</h3>
+<p>Costruiamo autorità e riconoscibilità nel mercato digitale.</p>
+</div>
+</div>
 </section>
 
-<!-- METODO -->
-<section>
-    <h2>Il nostro metodo</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>Analisi</h3>
-            <p>Studiamo il tuo mercato e il tuo target per creare una strategia su misura.</p>
-        </div>
-        <div class="card">
-            <h3>Costruzione</h3>
-            <p>Sviluppiamo sito e funnel ottimizzati per conversione e performance.</p>
-        </div>
-        <div class="card">
-            <h3>Crescita</h3>
-            <p>Implementiamo strategie di marketing per generare clienti costanti.</p>
-        </div>
-    </div>
+<section id="metodo" class="fade">
+<h2 class="section-title">Il Metodo</h2>
+<div class="method-grid">
+<div class="method-step">
+<div class="step-number">01</div>
+<h3>Analisi Strategica</h3>
+<p>Studio approfondito di mercato, competitor e target.</p>
+</div>
+<div class="method-step">
+<div class="step-number">02</div>
+<h3>Progettazione</h3>
+<p>Costruzione di ecosistemi digitali orientati alla conversione.</p>
+</div>
+<div class="method-step">
+<div class="step-number">03</div>
+<h3>Ottimizzazione</h3>
+<p>Miglioramento continuo delle performance nel tempo.</p>
+</div>
+</div>
 </section>
 
-<!-- CONTATTI -->
-<section class="contact" id="contact">
-    <h2>Contattaci</h2>
-    <p>Vuoi portare il tuo business al livello successivo?</p>
-    <a href="mailto:webboostitalia1@gmail.com" class="email">
-        webboostitalia1@gmail.com
-    </a>
+<section id="contatti" class="fade">
+<h2 class="section-title">Contattaci</h2>
+<div class="contact-box">
+<p>Scrivici per iniziare il tuo progetto digitale.</p>
+<br>
+<a href="mailto:webboostitalia1@gmail.com">
+webboostitalia1@gmail.com
+</a>
+</div>
 </section>
 
-<!-- INSTAGRAM -->
-<a href="https://www.instagram.com/webboostitalia"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="instagram"
-   id="instagramBtn">
-   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="35">
-   <path fill="currentColor" d="M224.1 141c-63.6 0-115 51.4-115 115s51.4 115 115 115 115-51.4 115-115-51.4-115-115-115zm0 186c-39.2 0-71-31.8-71-71s31.8-71 71-71 71 31.8 71 71-31.8 71-71 71zm146.4-194.3c0 14.9-12 26.9-26.9 26.9s-26.9-12-26.9-26.9 12-26.9 26.9-26.9 26.9 12 26.9 26.9zM398.8 80c-7.8-20.3-23.8-36.3-44.1-44.1C320.9 24 224 24 224 24s-96.9 0-130.7 11.9c-20.3 7.8-36.3 23.8-44.1 44.1C37.3 113.8 37.3 224 37.3 224s0 110.2 11.9 144c7.8 20.3 23.8 36.3 44.1 44.1C127.1 424 224 424 224 424s96.9 0 130.7-11.9c20.3-7.8 36.3-23.8 44.1-44.1C410.7 334.2 410.7 224 410.7 224s0-110.2-11.9-144z"/>
-   </svg>
+</div>
+
+<a href="https://instagram.com" target="_blank" class="instagram">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M7 2C4.2 2 2 4.2 2 7V17C2 19.8 4.2 22 7 22H17C19.8 22 22 19.8 22 17V7C22 4.2 19.8 2 17 2H7Z" stroke="url(#grad)" stroke-width="2"/>
+<circle cx="12" cy="12" r="4" stroke="url(#grad)" stroke-width="2"/>
+<circle cx="17" cy="7" r="1.5" fill="url(#grad)"/>
+<defs>
+<linearGradient id="grad" x1="0" y1="0" x2="24" y2="24">
+<stop stop-color="#feda75"/>
+<stop offset="0.5" stop-color="#d62976"/>
+<stop offset="1" stop-color="#962fbf"/>
+</linearGradient>
+</defs>
+</svg>
 </a>
 
 <script>
+const text="Progettiamo ecosistemi digitali che generano crescita reale";
+let i=0;
+function typeWriter(){
+if(i<text.length){
+document.getElementById("typewriter").innerHTML+=text[i];
+i++;
+setTimeout(typeWriter,35);
+}else{
+document.getElementById("subtitle").classList.add("show");
+}}
+typeWriter();
 
-/* TYPEWRITER */
-const text = "Costruiamo sistemi digitali che portano clienti.";
-let i = 0;
-function typing(){
-    if(i < text.length){
-        document.getElementById("typeText").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typing, 50);
-    }
-}
-typing();
-
-/* SCROLL */
-function scrollToContent(){
-    window.scrollTo({
-        top: window.innerHeight,
-        behavior: 'smooth'
-    });
+function enterSite(){
+document.getElementById("intro").classList.add("hide");
+document.getElementById("main").classList.add("show");
 }
 
-/* GLOW INSTAGRAM ON CONTACT */
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("visible");
+}
+});
+},{threshold:0.2});
 
-const contactSection = document.getElementById("contact");
-const instagramBtn = document.getElementById("instagramBtn");
-
-const observer = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-        if(entry.isIntersecting){
-            instagramBtn.classList.add("glow");
-        }
-    });
-},{threshold:0.5});
-
-observer.observe(contactSection);
-
+document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
+document.querySelectorAll(".chi-box").forEach(el=>observer.observe(el));
 </script>
 
 </body>
