@@ -11,8 +11,7 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 body{background:#050507;color:white;overflow-x:hidden;}
 
-/* ---------------- INTRO ---------------- */
-
+/* INTRO */
 .intro{
 position:fixed;
 width:100%;
@@ -79,8 +78,7 @@ transform:scale(1.07);
 box-shadow:0 0 70px rgba(250,204,21,1);
 }
 
-/* ---------------- MAIN ---------------- */
-
+/* MAIN */
 .main{
 opacity:0;
 transform:translateY(60px);
@@ -89,8 +87,6 @@ background:#050507;
 }
 
 .main.show{opacity:1;transform:translateY(0);}
-
-/* NAVBAR */
 
 .navbar{
 position:fixed;
@@ -131,14 +127,8 @@ transition:.3s;
 
 .nav-links a:hover:after{width:100%;}
 
-/* SECTIONS */
-
 section{padding:160px 10%;}
-
-.section-title{
-font-size:44px;
-margin-bottom:50px;
-}
+.section-title{font-size:44px;margin-bottom:50px;}
 
 .fade{
 opacity:0;
@@ -151,8 +141,7 @@ opacity:1;
 transform:translateY(0);
 }
 
-/* ---------------- CHI SIAMO ---------------- */
-
+/* CHI SIAMO */
 .chi-section p{
 margin-bottom:25px;
 font-size:18px;
@@ -200,7 +189,6 @@ box-shadow:0 0 30px rgba(250,204,21,0.2);
 }
 
 /* SERVIZI */
-
 .cards{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -222,7 +210,6 @@ box-shadow:0 0 40px rgba(250,204,21,0.3);
 }
 
 /* METODO */
-
 .method-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -255,7 +242,6 @@ right:30px;
 }
 
 /* CONTACT */
-
 .contact-box{
 background:linear-gradient(145deg,#0f0f15,#111117);
 padding:80px;
@@ -273,7 +259,6 @@ font-size:20px;
 .contact-box a:hover{text-decoration:underline;}
 
 /* INSTAGRAM */
-
 .instagram{
 position:fixed;
 bottom:30px;
@@ -295,64 +280,6 @@ box-shadow:0 0 25px rgba(0,0,0,0.4);
 width:30px;
 height:30px;
 }
-
-/* ===============================
-   RESPONSIVE
-================================= */
-
-@media (max-width:1024px){
-.hero-title{font-size:48px;}
-section{padding:120px 8%;}
-.navbar{padding:20px 8%;}
-}
-
-@media (max-width:768px){
-
-.hero-title{font-size:34px;}
-.cursor{height:40px;}
-.sub{font-size:16px;}
-.btn{padding:16px 40px;font-size:14px;}
-
-.navbar{
-flex-direction:column;
-gap:15px;
-padding:20px;
-}
-
-.nav-links{
-gap:20px;
-flex-wrap:wrap;
-justify-content:center;
-}
-
-section{padding:100px 6%;}
-.section-title{font-size:32px;}
-
-.chi-lead{font-size:18px;}
-.chi-section p{font-size:15px;}
-
-.cards,
-.method-grid,
-.chi-values{
-grid-template-columns:1fr;
-}
-
-.step-number{font-size:50px;}
-
-.contact-box{padding:50px 25px;}
-
-.instagram{
-width:55px;
-height:55px;
-bottom:20px;
-right:20px;
-}
-
-.instagram svg{
-width:24px;
-height:24px;
-}
-}
 </style>
 </head>
 
@@ -362,7 +289,7 @@ height:24px;
 <h1 class="hero-title" id="typewriter"></h1>
 <div class="cursor"></div>
 <p class="sub" id="subtitle">
-Siti web, landing page e strutture digitali pensate per posizionare brand e aumentare conversioni.
+Siti web, landing page e infrastrutture digitali progettate per posizionare il tuo brand e generare conversioni misurabili.
 </p>
 <button class="btn" onclick="enterSite()">Inizia Ora</button>
 </div>
@@ -384,16 +311,16 @@ Siti web, landing page e strutture digitali pensate per posizionare brand e aume
 
 <p class="chi-lead">
 WebBoost Italia progetta ecosistemi digitali per aziende che vogliono 
-<strong class="highlight">dominare il proprio mercato</strong> e trasformare il traffico in crescita concreta.
+<strong class="highlight">trasformare traffico in fatturato</strong>.
 </p>
 
 <p>
-Non realizziamo semplici siti web, ma infrastrutture digitali strategiche progettate per aumentare autorevolezza, fiducia e conversioni.
-Ogni progetto nasce da un’analisi approfondita del mercato e del comportamento degli utenti.
+Non realizziamo semplici siti web. Progettiamo strutture digitali strategiche pensate per attrarre, coinvolgere e convertire.
 </p>
 
 <p>
-Design, psicologia della persuasione e ottimizzazione continua lavorano insieme per creare piattaforme che generano risultati misurabili.
+Ogni progetto nasce da un’analisi approfondita del mercato, dei competitor e del comportamento degli utenti.
+Design, psicologia della persuasione e performance lavorano insieme per generare risultati concreti e misurabili.
 </p>
 
 <div class="chi-values">
@@ -403,11 +330,11 @@ Design, psicologia della persuasione e ottimizzazione continua lavorano insieme 
 </div>
 <div class="chi-box">
 <h3>Performance</h3>
-<p>Design e struttura sono sempre pensati per convertire.</p>
+<p>Design e struttura sono sempre pensati per massimizzare le conversioni.</p>
 </div>
 <div class="chi-box">
 <h3>Ottimizzazione Continua</h3>
-<p>Miglioriamo costantemente per massimizzare risultati e ROI.</p>
+<p>Monitoriamo e miglioriamo costantemente per aumentare il ROI.</p>
 </div>
 </div>
 </section>
@@ -417,7 +344,7 @@ Design, psicologia della persuasione e ottimizzazione continua lavorano insieme 
 <div class="cards">
 <div class="card">
 <h3>Web Design Strategico</h3>
-<p>Piattaforme ad alto impatto visivo e orientate alla conversione.</p>
+<p>Siti ad alto impatto visivo progettati per guidare l’utente all’azione.</p>
 </div>
 <div class="card">
 <h3>Landing & Funnel</h3>
@@ -452,9 +379,9 @@ Design, psicologia della persuasione e ottimizzazione continua lavorano insieme 
 </section>
 
 <section id="contatti" class="fade">
-<h2 class="section-title">Contattaci</h2>
+<h2 class="section-title">Iniziamo il tuo progetto</h2>
 <div class="contact-box">
-<p>Scrivici per iniziare il tuo progetto digitale.</p>
+<p>Scrivici e analizzeremo insieme la strategia migliore per la tua crescita digitale.</p>
 <br>
 <a href="mailto:webboostitalia1@gmail.com">
 webboostitalia1@gmail.com
@@ -464,7 +391,10 @@ webboostitalia1@gmail.com
 
 </div>
 
-<a href="https://instagram.com" target="_blank" class="instagram">
+<a href="https://www.instagram.com/webboostitalia"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="instagram">
 <svg viewBox="0 0 24 24" fill="none">
 <path d="M7 2C4.2 2 2 4.2 2 7V17C2 19.8 4.2 22 7 22H17C19.8 22 22 19.8 22 17V7C22 4.2 19.8 2 17 2H7Z" stroke="url(#grad)" stroke-width="2"/>
 <circle cx="12" cy="12" r="4" stroke="url(#grad)" stroke-width="2"/>
@@ -480,7 +410,7 @@ webboostitalia1@gmail.com
 </a>
 
 <script>
-const text="Progettiamo ecosistemi digitali che generano crescita reale";
+const text="Progettiamo ecosistemi digitali che trasformano traffico in fatturato";
 let i=0;
 function typeWriter(){
 if(i<text.length){
