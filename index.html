@@ -8,10 +8,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{background:#050507;color:white;overflow-x:hidden;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
 
-/* INTRO */
+body{
+background:#050507;
+color:white;
+overflow-x:hidden;
+}
+
+/* ================= INTRO ================= */
+
 .intro{
 position:fixed;
 width:100%;
@@ -22,47 +33,55 @@ align-items:center;
 justify-content:center;
 flex-direction:column;
 text-align:center;
-padding:20px;
+padding:30px 20px;
 transition:opacity 1s ease, visibility 1s ease;
 z-index:1000;
 }
 
-.intro.hide{opacity:0;visibility:hidden;}
+.intro.hide{
+opacity:0;
+visibility:hidden;
+}
 
 .hero-title{
-font-size:64px;
+font-size:clamp(28px,6vw,64px);
 font-weight:800;
-max-width:1100px;
-line-height:1.15;
+max-width:1000px;
+line-height:1.2;
 }
 
 .cursor{
 display:inline-block;
 width:3px;
-height:70px;
+height:clamp(30px,6vw,70px);
 background:#facc15;
 margin-left:8px;
 animation:blink 1s infinite;
 vertical-align:bottom;
 }
 
-@keyframes blink{50%{opacity:0;}}
+@keyframes blink{
+50%{opacity:0;}
+}
 
 .sub{
-margin-top:40px;
+margin-top:30px;
 color:#cbd5e1;
-font-size:20px;
-max-width:700px;
+font-size:clamp(15px,3vw,20px);
+max-width:600px;
 opacity:0;
 transform:translateY(30px);
 transition:1s ease;
 }
 
-.sub.show{opacity:1;transform:translateY(0);}
+.sub.show{
+opacity:1;
+transform:translateY(0);
+}
 
 .btn{
-margin-top:60px;
-padding:20px 60px;
+margin-top:50px;
+padding:16px 40px;
 background:#facc15;
 color:black;
 font-weight:600;
@@ -70,23 +89,29 @@ border:none;
 border-radius:50px;
 cursor:pointer;
 transition:.4s;
-box-shadow:0 0 40px rgba(250,204,21,0.6);
+box-shadow:0 0 30px rgba(250,204,21,0.6);
+font-size:15px;
 }
 
 .btn:hover{
-transform:scale(1.07);
-box-shadow:0 0 70px rgba(250,204,21,1);
+transform:scale(1.05);
+box-shadow:0 0 60px rgba(250,204,21,1);
 }
 
-/* MAIN */
+/* ================= MAIN ================= */
+
 .main{
 opacity:0;
 transform:translateY(60px);
 transition:1.4s ease;
-background:#050507;
 }
 
-.main.show{opacity:1;transform:translateY(0);}
+.main.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* NAVBAR */
 
 .navbar{
 position:fixed;
@@ -95,7 +120,7 @@ width:100%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:25px 10%;
+padding:20px 8%;
 background:rgba(0,0,0,0.6);
 backdrop-filter:blur(12px);
 z-index:100;
@@ -103,15 +128,15 @@ z-index:100;
 
 .nav-links{
 display:flex;
-gap:40px;
+gap:30px;
+flex-wrap:wrap;
 }
 
 .nav-links a{
 color:white;
 text-decoration:none;
-transition:.3s;
+font-size:14px;
 position:relative;
-font-size:15px;
 }
 
 .nav-links a:after{
@@ -125,10 +150,20 @@ bottom:-5px;
 transition:.3s;
 }
 
-.nav-links a:hover:after{width:100%;}
+.nav-links a:hover:after{
+width:100%;
+}
 
-section{padding:160px 10%;}
-.section-title{font-size:44px;margin-bottom:50px;}
+/* SECTIONS */
+
+section{
+padding:140px 8% 100px 8%;
+}
+
+.section-title{
+font-size:clamp(26px,5vw,44px);
+margin-bottom:40px;
+}
 
 .fade{
 opacity:0;
@@ -142,17 +177,18 @@ transform:translateY(0);
 }
 
 /* CHI SIAMO */
+
 .chi-section p{
-margin-bottom:25px;
-font-size:18px;
+margin-bottom:20px;
+font-size:clamp(14px,3.2vw,18px);
 color:#cbd5e1;
-line-height:1.8;
+line-height:1.7;
 }
 
 .chi-lead{
-font-size:22px;
+font-size:clamp(16px,4vw,22px);
 color:white;
-margin-bottom:35px;
+margin-bottom:30px;
 }
 
 .highlight{
@@ -161,91 +197,84 @@ text-shadow:0 0 15px rgba(250,204,21,0.5);
 }
 
 .chi-values{
-margin-top:60px;
+margin-top:40px;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
+gap:25px;
 }
 
 .chi-box{
-background:linear-gradient(145deg,#0f0f15,#111117);
-padding:40px;
-border-radius:25px;
-transition:.6s;
+background:#0f0f15;
+padding:30px;
+border-radius:20px;
 border:1px solid rgba(255,255,255,0.05);
-transform:translateY(40px);
-opacity:0;
-}
-
-.chi-box.visible{
-transform:translateY(0);
-opacity:1;
+transition:.4s;
 }
 
 .chi-box:hover{
-transform:translateY(-10px);
+transform:translateY(-8px);
 border-color:#facc15;
-box-shadow:0 0 30px rgba(250,204,21,0.2);
 }
 
 /* SERVIZI */
+
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:40px;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
 }
 
 .card{
-background:linear-gradient(145deg,#0f0f15,#111117);
-padding:50px;
-border-radius:25px;
-transition:.5s;
+background:#0f0f15;
+padding:35px;
+border-radius:20px;
 border:1px solid rgba(255,255,255,0.05);
+transition:.4s;
 }
 
 .card:hover{
-transform:translateY(-15px) scale(1.02);
+transform:translateY(-10px);
 border-color:#facc15;
-box-shadow:0 0 40px rgba(250,204,21,0.3);
 }
 
 /* METODO */
+
 .method-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:40px;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
 }
 
 .method-step{
-background:linear-gradient(145deg,#0f0f15,#111117);
-padding:60px 40px;
-border-radius:30px;
-position:relative;
-transition:.5s;
+background:#0f0f15;
+padding:40px 25px;
+border-radius:20px;
 border:1px solid rgba(255,255,255,0.05);
+position:relative;
+transition:.4s;
 }
 
 .method-step:hover{
 transform:translateY(-10px);
 border-color:#facc15;
-box-shadow:0 0 40px rgba(250,204,21,0.2);
 }
 
 .step-number{
-font-size:70px;
+font-size:60px;
 font-weight:800;
 color:#facc15;
 opacity:0.15;
 position:absolute;
-top:20px;
-right:30px;
+top:15px;
+right:20px;
 }
 
 /* CONTACT */
+
 .contact-box{
-background:linear-gradient(145deg,#0f0f15,#111117);
-padding:80px;
-border-radius:30px;
+background:#0f0f15;
+padding:50px 25px;
+border-radius:20px;
 text-align:center;
 }
 
@@ -253,32 +282,48 @@ text-align:center;
 color:#facc15;
 text-decoration:none;
 font-weight:600;
-font-size:20px;
 }
 
-.contact-box a:hover{text-decoration:underline;}
-
 /* INSTAGRAM */
+
 .instagram{
 position:fixed;
-bottom:30px;
-right:30px;
-width:65px;
-height:65px;
+bottom:20px;
+right:20px;
+width:55px;
+height:55px;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
 background:white;
-transition:.3s;
 box-shadow:0 0 25px rgba(0,0,0,0.4);
 }
 
-.instagram:hover{transform:scale(1.1);}
-
 .instagram svg{
-width:30px;
-height:30px;
+width:24px;
+height:24px;
+}
+
+/* MOBILE NAVBAR STACK */
+
+@media(max-width:768px){
+
+.navbar{
+flex-direction:column;
+gap:10px;
+padding:15px;
+}
+
+.nav-links{
+justify-content:center;
+gap:15px;
+}
+
+section{
+padding-top:120px;
+}
+
 }
 </style>
 </head>
@@ -289,7 +334,7 @@ height:30px;
 <h1 class="hero-title" id="typewriter"></h1>
 <div class="cursor"></div>
 <p class="sub" id="subtitle">
-Siti web, landing page e infrastrutture digitali progettate per posizionare il tuo brand e generare conversioni misurabili.
+Siti web e infrastrutture digitali progettate per generare conversioni reali.
 </p>
 <button class="btn" onclick="enterSite()">Inizia Ora</button>
 </div>
@@ -310,41 +355,36 @@ Siti web, landing page e infrastrutture digitali progettate per posizionare il t
 <h2 class="section-title">Chi siamo</h2>
 
 <p class="chi-lead">
-WebBoost Italia progetta ecosistemi digitali per aziende che vogliono 
+Progettiamo ecosistemi digitali per aziende che vogliono 
 <strong class="highlight">trasformare traffico in fatturato</strong>.
 </p>
 
 <p>
-Non realizziamo semplici siti web. Progettiamo strutture digitali strategiche pensate per attrarre, coinvolgere e convertire.
-</p>
-
-<p>
-Ogni progetto nasce da un’analisi approfondita del mercato, dei competitor e del comportamento degli utenti.
-Design, psicologia della persuasione e performance lavorano insieme per generare risultati concreti e misurabili.
+Non realizziamo semplici siti web, ma strutture strategiche orientate alla crescita.
 </p>
 
 <div class="chi-values">
 <div class="chi-box">
 <h3>Visione Strategica</h3>
-<p>Ogni scelta è guidata da obiettivi chiari e orientati alla crescita.</p>
+<p>Ogni scelta è guidata da obiettivi chiari.</p>
 </div>
 <div class="chi-box">
 <h3>Performance</h3>
-<p>Design e struttura sono sempre pensati per massimizzare le conversioni.</p>
+<p>Design pensato per convertire.</p>
 </div>
 <div class="chi-box">
-<h3>Ottimizzazione Continua</h3>
-<p>Monitoriamo e miglioriamo costantemente per aumentare il ROI.</p>
+<h3>Ottimizzazione</h3>
+<p>Miglioramento continuo dei risultati.</p>
 </div>
 </div>
 </section>
 
 <section id="servizi" class="fade">
-<h2 class="section-title">Cosa proponiamo</h2>
+<h2 class="section-title">Servizi</h2>
 <div class="cards">
 <div class="card">
 <h3>Web Design Strategico</h3>
-<p>Siti ad alto impatto visivo progettati per guidare l’utente all’azione.</p>
+<p>Piattaforme ad alto impatto orientate alla conversione.</p>
 </div>
 <div class="card">
 <h3>Landing & Funnel</h3>
@@ -352,7 +392,7 @@ Design, psicologia della persuasione e performance lavorano insieme per generare
 </div>
 <div class="card">
 <h3>Brand Positioning</h3>
-<p>Costruiamo autorità e riconoscibilità nel mercato digitale.</p>
+<p>Costruiamo autorità nel mercato digitale.</p>
 </div>
 </div>
 </section>
@@ -362,26 +402,26 @@ Design, psicologia della persuasione e performance lavorano insieme per generare
 <div class="method-grid">
 <div class="method-step">
 <div class="step-number">01</div>
-<h3>Analisi Strategica</h3>
-<p>Studio approfondito di mercato, competitor e target.</p>
+<h3>Analisi</h3>
+<p>Studio approfondito di mercato e target.</p>
 </div>
 <div class="method-step">
 <div class="step-number">02</div>
 <h3>Progettazione</h3>
-<p>Costruzione di ecosistemi digitali orientati alla conversione.</p>
+<p>Costruzione strategica orientata ai risultati.</p>
 </div>
 <div class="method-step">
 <div class="step-number">03</div>
 <h3>Ottimizzazione</h3>
-<p>Miglioramento continuo delle performance nel tempo.</p>
+<p>Miglioramento continuo delle performance.</p>
 </div>
 </div>
 </section>
 
 <section id="contatti" class="fade">
-<h2 class="section-title">Iniziamo il tuo progetto</h2>
+<h2 class="section-title">Contattaci</h2>
 <div class="contact-box">
-<p>Scrivici e analizzeremo insieme la strategia migliore per la tua crescita digitale.</p>
+<p>Scrivici per iniziare il tuo progetto digitale.</p>
 <br>
 <a href="mailto:webboostitalia1@gmail.com">
 webboostitalia1@gmail.com
@@ -410,7 +450,7 @@ webboostitalia1@gmail.com
 </a>
 
 <script>
-const text="Progettiamo ecosistemi digitali che trasformano traffico in fatturato";
+const text="Progettiamo ecosistemi digitali che generano crescita reale";
 let i=0;
 function typeWriter(){
 if(i<text.length){
@@ -436,7 +476,6 @@ entry.target.classList.add("visible");
 },{threshold:0.2});
 
 document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
-document.querySelectorAll(".chi-box").forEach(el=>observer.observe(el));
 </script>
 
 </body>
