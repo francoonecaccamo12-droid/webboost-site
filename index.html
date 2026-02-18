@@ -115,6 +115,7 @@ color:white;
 text-decoration:none;
 transition:.3s;
 position:relative;
+font-size:15px;
 }
 
 .nav-links a:after{
@@ -295,24 +296,77 @@ width:30px;
 height:30px;
 }
 
+/* ===============================
+   RESPONSIVE
+================================= */
+
+@media (max-width:1024px){
+.hero-title{font-size:48px;}
+section{padding:120px 8%;}
+.navbar{padding:20px 8%;}
+}
+
+@media (max-width:768px){
+
+.hero-title{font-size:34px;}
+.cursor{height:40px;}
+.sub{font-size:16px;}
+.btn{padding:16px 40px;font-size:14px;}
+
+.navbar{
+flex-direction:column;
+gap:15px;
+padding:20px;
+}
+
+.nav-links{
+gap:20px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+section{padding:100px 6%;}
+.section-title{font-size:32px;}
+
+.chi-lead{font-size:18px;}
+.chi-section p{font-size:15px;}
+
+.cards,
+.method-grid,
+.chi-values{
+grid-template-columns:1fr;
+}
+
+.step-number{font-size:50px;}
+
+.contact-box{padding:50px 25px;}
+
+.instagram{
+width:55px;
+height:55px;
+bottom:20px;
+right:20px;
+}
+
+.instagram svg{
+width:24px;
+height:24px;
+}
+}
 </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
 <div class="intro" id="intro">
 <h1 class="hero-title" id="typewriter"></h1>
 <div class="cursor"></div>
-
 <p class="sub" id="subtitle">
 Siti web, landing page e strutture digitali pensate per posizionare brand e aumentare conversioni.
 </p>
-
 <button class="btn" onclick="enterSite()">Inizia Ora</button>
 </div>
 
-<!-- MAIN -->
 <div class="main" id="main">
 
 <div class="navbar">
@@ -343,22 +397,18 @@ Design, psicologia della persuasione e ottimizzazione continua lavorano insieme 
 </p>
 
 <div class="chi-values">
-
 <div class="chi-box">
 <h3>Visione Strategica</h3>
 <p>Ogni scelta è guidata da obiettivi chiari e orientati alla crescita.</p>
 </div>
-
 <div class="chi-box">
 <h3>Performance</h3>
 <p>Design e struttura sono sempre pensati per convertire.</p>
 </div>
-
 <div class="chi-box">
 <h3>Ottimizzazione Continua</h3>
 <p>Miglioriamo costantemente per massimizzare risultati e ROI.</p>
 </div>
-
 </div>
 </section>
 
