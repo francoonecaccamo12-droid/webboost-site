@@ -10,30 +10,34 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
         messages: [
           {
             role: "system",
-            content: "Sei un assistente commerciale per WebBoost Italia. Rispondi in modo professionale, chiaro, breve e orientato alla conversione."
+            content: "Sei l'assistente virtuale di WebBoost Italia. Rispondi in modo professionale e orientato alla vendita."
           },
           {
             role: "user",
             content: message
           }
-        ]
-      })
+        ],
+      }),
     });
 
     const data = await response.json();
 
-    return res.status(200).json({
+    if (!data.choices) {
+      return res.status(500).json({ error: data });
+    }
+
+    res.status(200).json({
       reply: data.choices[0].message.content
     });
 
   } catch (error) {
-    return res.status(500).json({ error: "Errore server" });
+    res.status(500).json({ error: error.message });
   }
 }
