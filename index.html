@@ -305,7 +305,57 @@ width:24px;
 height:24px;
 }
 
-/* MOBILE NAVBAR STACK */
+/* CHATBOT IA */
+
+#chat-toggle{
+position:fixed;
+bottom:90px;
+right:20px;
+background:#facc15;
+color:black;
+width:55px;
+height:55px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+font-size:22px;
+box-shadow:0 0 20px rgba(250,204,21,0.7);
+z-index:200;
+}
+
+#chat-window{
+position:fixed;
+bottom:160px;
+right:20px;
+width:340px;
+background:#0f0f15;
+border-radius:20px;
+padding:20px;
+display:none;
+border:1px solid rgba(255,255,255,0.1);
+z-index:200;
+}
+
+#chat-messages{
+max-height:260px;
+overflow-y:auto;
+margin-bottom:10px;
+font-size:14px;
+}
+
+.message{
+margin-bottom:8px;
+}
+
+.user{
+color:#facc15;
+}
+
+.bot{
+color:#cbd5e1;
+}
 
 @media(max-width:768px){
 
@@ -449,6 +499,24 @@ webboostitalia1@gmail.com
 </svg>
 </a>
 
+<!-- CHATBOT IA -->
+<div id="chat-toggle" onclick="toggleChat()">💬</div>
+
+<div id="chat-window">
+<div id="chat-messages">
+<div class="message bot"><strong>WebBoost AI:</strong> Ciao 👋 Come posso aiutarti oggi?</div>
+</div>
+
+<div style="display:flex; gap:10px; margin-top:10px;">
+<input id="chat-input" type="text" placeholder="Scrivi un messaggio..." 
+style="flex:1; padding:10px; border-radius:10px; border:none;">
+<button onclick="sendMessage()" 
+style="padding:10px 15px; border-radius:10px; border:none; background:#facc15; font-weight:600;">
+Invia
+</button>
+</div>
+</div>
+
 <script>
 const text="Progettiamo ecosistemi digitali che generano crescita reale";
 let i=0;
@@ -476,6 +544,47 @@ entry.target.classList.add("visible");
 },{threshold:0.2});
 
 document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
+
+function toggleChat(){
+let chat=document.getElementById("chat-window");
+chat.style.display=chat.style.display==="block"?"none":"block";
+}
+
+async function sendMessage(){
+const input=document.getElementById("chat-input");
+const messages=document.getElementById("chat-messages");
+const text=input.value;
+
+if(!text) return;
+
+messages.innerHTML+=`<div class="message user"><strong>Tu:</strong> ${text}</div>`;
+input.value="";
+messages.scrollTop=messages.scrollHeight;
+
+try{
+const response=await fetch("/api/chat",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({message:text})
+});
+
+const data=await response.json();
+
+messages.innerHTML+=`<div class="message bot"><strong>WebBoost AI:</strong> ${data.reply}</div>`;
+messages.scrollTop=messages.scrollHeight;
+
+}catch(error){
+messages.innerHTML+=`<div class="message bot"><strong>WebBoost AI:</strong> Errore di connessione.</div>`;
+}
+}
+
+document.getElementById("chat-input").addEventListener("keypress",function(e){
+if(e.key==="Enter"){
+sendMessage();
+}
+});
 </script>
 
 </body>
