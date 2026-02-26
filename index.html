@@ -289,7 +289,7 @@ font-weight:600;
 .instagram{
 position:fixed;
 bottom:20px;
-right:20px;
+left:20px;
 width:55px;
 height:55px;
 border-radius:50%;
@@ -298,6 +298,7 @@ align-items:center;
 justify-content:center;
 background:white;
 box-shadow:0 0 25px rgba(0,0,0,0.4);
+z-index:9998;
 }
 
 .instagram svg{
@@ -305,8 +306,8 @@ width:24px;
 height:24px;
 }
 
-<!-- ================= CHATBOT LIVELLO 2 PRO ================= -->
-<style>
+/* ================= CHATBOT ================= */
+
 #chat-toggle{
 position:fixed;
 bottom:20px;
@@ -336,7 +337,6 @@ display:none;
 flex-direction:column;
 overflow:hidden;
 box-shadow:0 0 30px rgba(0,0,0,0.4);
-font-family:'Poppins',sans-serif;
 z-index:9999;
 }
 
@@ -394,141 +394,8 @@ font-weight:600;
 width:100%;
 }
 </style>
+</head>
 
-<div id="chat-toggle" onclick="toggleChat()">💬</div>
-
-<div id="chatbot">
-<div id="chat-header">Consulente WebBoost</div>
-<div id="chat-messages">
-<div class="message bot">Ciao 👋 Partiamo dal tuo nome?</div>
-</div>
-<div id="chat-input-area">
-<input type="text" id="chat-input" placeholder="Scrivi qui...">
-<button onclick="sendMessage()">Invia</button>
-</div>
-</div>
-
-<script>
-let step=0;
-let lead={};
-
-function toggleChat(){
-const c=document.getElementById("chatbot");
-c.style.display=c.style.display==="flex"?"none":"flex";
-}
-
-function addMessage(text,type){
-const chat=document.getElementById("chat-messages");
-const div=document.createElement("div");
-div.classList.add("message",type);
-div.innerHTML=text;
-chat.appendChild(div);
-chat.scrollTop=chat.scrollHeight;
-}
-
-function typing(callback){
-const chat=document.getElementById("chat-messages");
-const t=document.createElement("div");
-t.classList.add("message","bot","typing");
-t.textContent="Sta scrivendo...";
-chat.appendChild(t);
-chat.scrollTop=chat.scrollHeight;
-
-setTimeout(()=>{
-chat.removeChild(t);
-callback();
-},800);
-}
-
-function sendMessage(){
-const input=document.getElementById("chat-input");
-const text=input.value.trim();
-if(!text) return;
-
-addMessage(text,"user");
-input.value="";
-
-typing(()=>logic(text));
-}
-
-function logic(text){
-
-if(step===0){
-lead.nome=text;
-addMessage("Perfetto "+text+" 👍 Che attività hai?","bot");
-step=1; return;
-}
-
-if(step===1){
-lead.attivita=text;
-addMessage("Vuoi un sito vetrina o uno che generi clienti?","bot");
-step=2; return;
-}
-
-if(step===2){
-lead.tipo=text;
-addMessage("Indicativamente che budget hai in mente?","bot");
-step=3; return;
-}
-
-if(step===3){
-lead.budget=text;
-addMessage("Perfetto 🔥 Lasciami la tua email o Instagram.","bot");
-step=4; return;
-}
-
-if(step===4){
-lead.contatto=text;
-saveLead();
-showSummary();
-step=5; return;
-}
-
-addMessage("Scrivimi se vuoi altre informazioni 🚀","bot");
-}
-
-function saveLead(){
-let leads=JSON.parse(localStorage.getItem("webboost_leads")||"[]");
-leads.push(lead);
-localStorage.setItem("webboost_leads",JSON.stringify(leads));
-}
-
-function showSummary(){
-let summary=`
-<div class="bot">
-Grazie 🙌 Ecco il riepilogo:
-
-Nome: ${lead.nome}<br>
-Attività: ${lead.attivita}<br>
-Tipo: ${lead.tipo}<br>
-Budget: ${lead.budget}<br>
-Contatto: ${lead.contatto}
-
-<button class="copy-btn" onclick="copyLead()">Copia Lead</button>
-</div>
-`;
-addMessage(summary,"bot");
-}
-
-function copyLead(){
-const text=`
-Nuovo Lead WebBoost:
-
-Nome: ${lead.nome}
-Attività: ${lead.attivita}
-Tipo: ${lead.tipo}
-Budget: ${lead.budget}
-Contatto: ${lead.contatto}
-`;
-navigator.clipboard.writeText(text);
-alert("Lead copiato negli appunti ✅");
-}
-
-document.getElementById("chat-input").addEventListener("keypress",function(e){
-if(e.key==="Enter") sendMessage();
-});
-</script>
-<!-- ================= FINE CHATBOT ================= -->
 <body>
 
 <div class="intro" id="intro">
@@ -633,9 +500,9 @@ webboostitalia1@gmail.com
 </div>
 
 <a href="https://www.instagram.com/webboostitalia"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="instagram">
+target="_blank"
+rel="noopener noreferrer"
+class="instagram">
 <svg viewBox="0 0 24 24" fill="none">
 <path d="M7 2C4.2 2 2 4.2 2 7V17C2 19.8 4.2 22 7 22H17C19.8 22 22 19.8 22 17V7C22 4.2 19.8 2 17 2H7Z" stroke="url(#grad)" stroke-width="2"/>
 <circle cx="12" cy="12" r="4" stroke="url(#grad)" stroke-width="2"/>
@@ -650,21 +517,18 @@ webboostitalia1@gmail.com
 </svg>
 </a>
 
-<!-- CHATBOT IA -->
+<!-- ================= CHATBOT ================= -->
+
 <div id="chat-toggle" onclick="toggleChat()">💬</div>
 
-<div id="chat-window">
+<div id="chatbot">
+<div id="chat-header">Consulente WebBoost</div>
 <div id="chat-messages">
-<div class="message bot"><strong>WebBoost AI:</strong> Ciao 👋 Come posso aiutarti oggi?</div>
+<div class="message bot">Ciao 👋 Partiamo dal tuo nome?</div>
 </div>
-
-<div style="display:flex; gap:10px; margin-top:10px;">
-<input id="chat-input" type="text" placeholder="Scrivi un messaggio..." 
-style="flex:1; padding:10px; border-radius:10px; border:none;">
-<button onclick="sendMessage()" 
-style="padding:10px 15px; border-radius:10px; border:none; background:#facc15; font-weight:600;">
-Invia
-</button>
+<div id="chat-input-area">
+<input type="text" id="chat-input" placeholder="Scrivi qui...">
+<button onclick="sendMessage()">Invia</button>
 </div>
 </div>
 
@@ -696,49 +560,78 @@ entry.target.classList.add("visible");
 
 document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
 
+let step=0;
+let lead={};
+
 function toggleChat(){
-let chat=document.getElementById("chat-window");
-chat.style.display=chat.style.display==="block"?"none":"block";
+const c=document.getElementById("chatbot");
+c.style.display=c.style.display==="flex"?"none":"flex";
 }
 
-async function sendMessage(){
+function addMessage(text,type){
+const chat=document.getElementById("chat-messages");
+const div=document.createElement("div");
+div.classList.add("message",type);
+div.innerHTML=text;
+chat.appendChild(div);
+chat.scrollTop=chat.scrollHeight;
+}
+
+function typing(callback){
+const chat=document.getElementById("chat-messages");
+const t=document.createElement("div");
+t.classList.add("message","bot","typing");
+t.textContent="Sta scrivendo...";
+chat.appendChild(t);
+chat.scrollTop=chat.scrollHeight;
+setTimeout(()=>{chat.removeChild(t);callback();},800);
+}
+
+function sendMessage(){
 const input=document.getElementById("chat-input");
-const messages=document.getElementById("chat-messages");
-const text=input.value;
-
+const text=input.value.trim();
 if(!text) return;
-
-messages.innerHTML+=`<div class="message user"><strong>Tu:</strong> ${text}</div>`;
+addMessage(text,"user");
 input.value="";
-messages.scrollTop=messages.scrollHeight;
-
-try{
-const response=await fetch("/api/chat",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({message:text})
-});
-
-const data=await response.json();
-
-messages.innerHTML+=`<div class="message bot"><strong>WebBoost AI:</strong> ${data.reply}</div>`;
-messages.scrollTop=messages.scrollHeight;
-
-}catch(error){
-messages.innerHTML+=`<div class="message bot"><strong>WebBoost AI:</strong> Errore di connessione.</div>`;
+typing(()=>logic(text));
 }
+
+function logic(text){
+if(step===0){lead.nome=text;addMessage("Perfetto "+text+" 👍 Che attività hai?","bot");step=1;return;}
+if(step===1){lead.attivita=text;addMessage("Vuoi un sito vetrina o uno che generi clienti?","bot");step=2;return;}
+if(step===2){lead.tipo=text;addMessage("Indicativamente che budget hai in mente?","bot");step=3;return;}
+if(step===3){lead.budget=text;addMessage("Perfetto 🔥 Lasciami la tua email o Instagram.","bot");step=4;return;}
+if(step===4){lead.contatto=text;showSummary();step=5;return;}
+addMessage("Scrivimi se vuoi altre informazioni 🚀","bot");
+}
+
+function showSummary(){
+let summary=`Grazie 🙌 Ecco il riepilogo:<br><br>
+Nome: ${lead.nome}<br>
+Attività: ${lead.attivita}<br>
+Tipo: ${lead.tipo}<br>
+Budget: ${lead.budget}<br>
+Contatto: ${lead.contatto}
+<br><br>
+<button class="copy-btn" onclick="copyLead()">Copia Lead</button>`;
+addMessage(summary,"bot");
+}
+
+function copyLead(){
+const text=`Nuovo Lead WebBoost:
+Nome: ${lead.nome}
+Attività: ${lead.attivita}
+Tipo: ${lead.tipo}
+Budget: ${lead.budget}
+Contatto: ${lead.contatto}`;
+navigator.clipboard.writeText(text);
+alert("Lead copiato negli appunti ✅");
 }
 
 document.getElementById("chat-input").addEventListener("keypress",function(e){
-if(e.key==="Enter"){
-sendMessage();
-}
+if(e.key==="Enter") sendMessage();
 });
 </script>
 
 </body>
 </html>
-
-
