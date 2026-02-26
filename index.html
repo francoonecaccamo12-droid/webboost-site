@@ -305,125 +305,228 @@ width:24px;
 height:24px;
 }
 
-<!-- ================= CHATBOT WEBBOOST AI ================= -->
+<!-- ================= CHATBOT LIVELLO 2 PRO ================= -->
 <style>
-#chatbot-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 320px;
-  height: 420px;
-  background: #111;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  font-family: Arial, sans-serif;
-  z-index: 9999;
+#chat-toggle{
+position:fixed;
+bottom:20px;
+right:20px;
+width:60px;
+height:60px;
+background:#facc15;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:26px;
+cursor:pointer;
+box-shadow:0 0 20px rgba(250,204,21,0.6);
+z-index:9999;
 }
 
-#chat-header {
-  background: #00c896;
-  padding: 12px;
-  font-weight: bold;
-  color: white;
-  text-align: center;
+#chatbot{
+position:fixed;
+bottom:100px;
+right:20px;
+width:340px;
+height:480px;
+background:#0f0f15;
+border-radius:20px;
+display:none;
+flex-direction:column;
+overflow:hidden;
+box-shadow:0 0 30px rgba(0,0,0,0.4);
+font-family:'Poppins',sans-serif;
+z-index:9999;
 }
 
-#chat-messages {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  color: white;
-  font-size: 14px;
+#chat-header{
+background:#facc15;
+color:black;
+padding:15px;
+font-weight:600;
+text-align:center;
 }
 
-.message {
-  margin-bottom: 10px;
+#chat-messages{
+flex:1;
+padding:15px;
+overflow-y:auto;
+font-size:14px;
+color:white;
 }
 
-.user {
-  text-align: right;
-  color: #00c896;
+.message{margin-bottom:10px;}
+.user{text-align:right;color:#facc15;}
+.bot{text-align:left;color:#cbd5e1;}
+.typing{opacity:.6;font-style:italic;}
+
+#chat-input-area{
+display:flex;
+border-top:1px solid #222;
 }
 
-.bot {
-  text-align: left;
-  color: white;
+#chat-input{
+flex:1;
+padding:12px;
+border:none;
+outline:none;
+background:#111;
+color:white;
 }
 
-#chat-input-area {
-  display: flex;
-  border-top: 1px solid #333;
+#chat-input-area button{
+padding:12px;
+border:none;
+background:#facc15;
+color:black;
+font-weight:600;
+cursor:pointer;
 }
 
-#chat-input {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  outline: none;
-  background: #222;
-  color: white;
-}
-
-#chat-input-area button {
-  padding: 10px 15px;
-  border: none;
-  background: #00c896;
-  color: white;
-  cursor: pointer;
+.copy-btn{
+margin-top:10px;
+padding:8px;
+background:#facc15;
+border:none;
+cursor:pointer;
+font-weight:600;
+width:100%;
 }
 </style>
 
-<div id="chatbot-container">
-  <div id="chat-header">Chat con WebBoost AI</div>
-  <div id="chat-messages"></div>
-  <div id="chat-input-area">
-    <input type="text" id="chat-input" placeholder="Scrivi un messaggio..." />
-    <button onclick="sendMessage()">Invia</button>
-  </div>
+<div id="chat-toggle" onclick="toggleChat()">💬</div>
+
+<div id="chatbot">
+<div id="chat-header">Consulente WebBoost</div>
+<div id="chat-messages">
+<div class="message bot">Ciao 👋 Partiamo dal tuo nome?</div>
+</div>
+<div id="chat-input-area">
+<input type="text" id="chat-input" placeholder="Scrivi qui...">
+<button onclick="sendMessage()">Invia</button>
+</div>
 </div>
 
 <script>
-async function sendMessage() {
-  const input = document.getElementById("chat-input");
-  const message = input.value.trim();
-  if (!message) return;
+let step=0;
+let lead={};
 
-  addMessage(message, "user");
-  input.value = "";
-
-  try {
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message: message }),
-    });
-
-    const data = await response.json();
-
-    if (data.reply) {
-      addMessage(data.reply, "bot");
-    } else {
-      addMessage("Errore nella risposta del server.", "bot");
-    }
-
-  } catch (error) {
-    addMessage("Errore di connessione.", "bot");
-  }
+function toggleChat(){
+const c=document.getElementById("chatbot");
+c.style.display=c.style.display==="flex"?"none":"flex";
 }
 
-function addMessage(text, sender) {
-  const chatMessages = document.getElementById("chat-messages");
-  const messageDiv = document.createElement("div");
-  messageDiv.classList.add("message", sender);
-  messageDiv.textContent = text;
-  chatMessages.appendChild(messageDiv);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
+function addMessage(text,type){
+const chat=document.getElementById("chat-messages");
+const div=document.createElement("div");
+div.classList.add("message",type);
+div.innerHTML=text;
+chat.appendChild(div);
+chat.scrollTop=chat.scrollHeight;
 }
+
+function typing(callback){
+const chat=document.getElementById("chat-messages");
+const t=document.createElement("div");
+t.classList.add("message","bot","typing");
+t.textContent="Sta scrivendo...";
+chat.appendChild(t);
+chat.scrollTop=chat.scrollHeight;
+
+setTimeout(()=>{
+chat.removeChild(t);
+callback();
+},800);
+}
+
+function sendMessage(){
+const input=document.getElementById("chat-input");
+const text=input.value.trim();
+if(!text) return;
+
+addMessage(text,"user");
+input.value="";
+
+typing(()=>logic(text));
+}
+
+function logic(text){
+
+if(step===0){
+lead.nome=text;
+addMessage("Perfetto "+text+" 👍 Che attività hai?","bot");
+step=1; return;
+}
+
+if(step===1){
+lead.attivita=text;
+addMessage("Vuoi un sito vetrina o uno che generi clienti?","bot");
+step=2; return;
+}
+
+if(step===2){
+lead.tipo=text;
+addMessage("Indicativamente che budget hai in mente?","bot");
+step=3; return;
+}
+
+if(step===3){
+lead.budget=text;
+addMessage("Perfetto 🔥 Lasciami la tua email o Instagram.","bot");
+step=4; return;
+}
+
+if(step===4){
+lead.contatto=text;
+saveLead();
+showSummary();
+step=5; return;
+}
+
+addMessage("Scrivimi se vuoi altre informazioni 🚀","bot");
+}
+
+function saveLead(){
+let leads=JSON.parse(localStorage.getItem("webboost_leads")||"[]");
+leads.push(lead);
+localStorage.setItem("webboost_leads",JSON.stringify(leads));
+}
+
+function showSummary(){
+let summary=`
+<div class="bot">
+Grazie 🙌 Ecco il riepilogo:
+
+Nome: ${lead.nome}<br>
+Attività: ${lead.attivita}<br>
+Tipo: ${lead.tipo}<br>
+Budget: ${lead.budget}<br>
+Contatto: ${lead.contatto}
+
+<button class="copy-btn" onclick="copyLead()">Copia Lead</button>
+</div>
+`;
+addMessage(summary,"bot");
+}
+
+function copyLead(){
+const text=`
+Nuovo Lead WebBoost:
+
+Nome: ${lead.nome}
+Attività: ${lead.attivita}
+Tipo: ${lead.tipo}
+Budget: ${lead.budget}
+Contatto: ${lead.contatto}
+`;
+navigator.clipboard.writeText(text);
+alert("Lead copiato negli appunti ✅");
+}
+
+document.getElementById("chat-input").addEventListener("keypress",function(e){
+if(e.key==="Enter") sendMessage();
+});
 </script>
 <!-- ================= FINE CHATBOT ================= -->
 <body>
@@ -637,4 +740,5 @@ sendMessage();
 
 </body>
 </html>
+
 
