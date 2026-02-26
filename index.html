@@ -7,6 +7,9 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
+<!-- EMAILJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
 <style>
 *{
 margin:0;
@@ -531,8 +534,14 @@ class="instagram">
 <button onclick="sendMessage()">Invia</button>
 </div>
 </div>
-
 <script>
+
+/* ================= EMAILJS INIT ================= */
+(function(){
+emailjs.init("Ag5wRtOXoekEbTCvw");
+})();
+
+/* ================= TYPEWRITER ================= */
 const text="Progettiamo ecosistemi digitali che generano crescita reale";
 let i=0;
 function typeWriter(){
@@ -559,6 +568,8 @@ entry.target.classList.add("visible");
 },{threshold:0.2});
 
 document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
+
+/* ================= CHATBOT ================= */
 
 let step=0;
 let lead={};
@@ -597,22 +608,77 @@ typing(()=>logic(text));
 }
 
 function logic(text){
-if(step===0){lead.nome=text;addMessage("Perfetto "+text+" 👍 Che attività hai?","bot");step=1;return;}
-if(step===1){lead.attivita=text;addMessage("Vuoi un sito vetrina o uno che generi clienti?","bot");step=2;return;}
-if(step===2){lead.tipo=text;addMessage("Indicativamente che budget hai in mente?","bot");step=3;return;}
-if(step===3){lead.budget=text;addMessage("Perfetto 🔥 Lasciami la tua email o Instagram.","bot");step=4;return;}
-if(step===4){lead.contatto=text;showSummary();step=5;return;}
+
+if(step===0){
+lead.nome=text;
+addMessage("Perfetto "+text+" 👍 Che attività hai?","bot");
+step=1;return;
+}
+
+if(step===1){
+lead.attivita=text;
+addMessage("Vuoi un sito vetrina o uno che generi clienti?","bot");
+step=2;return;
+}
+
+if(step===2){
+lead.tipo=text;
+addMessage("Indicativamente che budget hai in mente?","bot");
+step=3;return;
+}
+
+if(step===3){
+lead.budget=text;
+addMessage("Perfetto 🔥 Lasciami la tua email.","bot");
+step=4;return;
+}
+
+if(step===4){
+lead.email=text;
+sendEmail();   // 👈 QUI INVIA EMAIL
+showSummary();
+step=5;return;
+}
+
 addMessage("Scrivimi se vuoi altre informazioni 🚀","bot");
 }
 
+/* ================= INVIO EMAIL ================= */
+
+function sendEmail(){
+
+let consigli="";
+
+if(lead.tipo.toLowerCase().includes("vetrina")){
+consigli="Ti consigliamo un sito vetrina ottimizzato SEO per presentare al meglio la tua attività.";
+}else{
+consigli="Ti consigliamo un sistema con funnel strategico e automazioni per generare clienti in modo continuo.";
+}
+
+const params={
+nome:lead.nome,
+attivita:lead.attivita,
+tipo:lead.tipo,
+budget:lead.budget,
+email:lead.email,
+consigli:consigli
+};
+
+emailjs.send("service_b2z4mkb","template_zydfl5j",params)
+.then(function(){
+console.log("Email inviata");
+})
+.catch(function(error){
+console.log("Errore email:",error);
+});
+}
+
+/* ================= RIEPILOGO ================= */
+
 function showSummary(){
-let summary=`Grazie 🙌 Ecco il riepilogo:<br><br>
-Nome: ${lead.nome}<br>
-Attività: ${lead.attivita}<br>
-Tipo: ${lead.tipo}<br>
-Budget: ${lead.budget}<br>
-Contatto: ${lead.contatto}
-<br><br>
+let summary=`Grazie ${lead.nome} 🙌<br><br>
+Controlla la tua email 📩<br>
+Ti abbiamo inviato i prossimi step personalizzati.<br><br>
 <button class="copy-btn" onclick="copyLead()">Copia Lead</button>`;
 addMessage(summary,"bot");
 }
@@ -623,7 +689,7 @@ Nome: ${lead.nome}
 Attività: ${lead.attivita}
 Tipo: ${lead.tipo}
 Budget: ${lead.budget}
-Contatto: ${lead.contatto}`;
+Email: ${lead.email}`;
 navigator.clipboard.writeText(text);
 alert("Lead copiato negli appunti ✅");
 }
@@ -631,7 +697,9 @@ alert("Lead copiato negli appunti ✅");
 document.getElementById("chat-input").addEventListener("keypress",function(e){
 if(e.key==="Enter") sendMessage();
 });
+
 </script>
 
 </body>
 </html>
+
