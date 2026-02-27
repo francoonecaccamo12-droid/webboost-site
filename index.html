@@ -649,10 +649,35 @@ function sendEmail(){
 
 let consigli="";
 
+// 🔥 Analisi tipo sito
 if(lead.tipo.toLowerCase().includes("vetrina")){
-consigli="Ti consigliamo un sito vetrina ottimizzato SEO per presentare al meglio la tua attività.";
-}else{
-consigli="Ti consigliamo un sistema con funnel strategico e automazioni per generare clienti in modo continuo.";
+consigli += "Ti consigliamo una landing page professionale con recensioni, mappa e WhatsApp diretto. ";
+}
+
+if(lead.tipo.toLowerCase().includes("clienti")){
+consigli += "Ti consigliamo una struttura orientata alla conversione con call to action forti e raccolta contatti. ";
+}
+
+if(lead.tipo.toLowerCase().includes("ecommerce")){
+consigli += "Ti consigliamo un e-commerce ottimizzato con pagine prodotto persuasive e checkout semplificato. ";
+}
+
+// 🔥 Analisi budget
+if(lead.budget.toLowerCase().includes("basso")){
+consigli += "Possiamo partire con una soluzione essenziale ma strategica per generare risultati rapidi.";
+}
+
+if(lead.budget.toLowerCase().includes("medio")){
+consigli += "Possiamo integrare SEO base e una strategia di acquisizione clienti.";
+}
+
+if(lead.budget.toLowerCase().includes("alto")){
+consigli += "Possiamo sviluppare un sistema completo con funnel marketing e automazioni email.";
+}
+
+// fallback sicurezza
+if(consigli===""){
+consigli="Ti consigliamo una soluzione personalizzata studiata sui tuoi obiettivi specifici.";
 }
 
 const params={
@@ -666,12 +691,20 @@ consigli:consigli
 
 emailjs.send("service_b2z4mkb","template_zydfl5j",params)
 .then(function(){
-console.log("Email inviata");
+console.log("Email inviata correttamente ✅");
 })
 .catch(function(error){
 console.log("Errore email:",error);
 });
 }
+const params={
+nome:lead.nome,
+attivita:lead.attivita,
+tipo:lead.tipo,
+budget:lead.budget,
+email:lead.email,
+consigli:consigli
+};
 
 /* ================= RIEPILOGO ================= */
 
@@ -702,5 +735,6 @@ if(e.key==="Enter") sendMessage();
 
 </body>
 </html>
+
 
 
