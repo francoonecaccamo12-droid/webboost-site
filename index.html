@@ -647,55 +647,35 @@ addMessage("Scrivimi se vuoi altre informazioni 🚀","bot");
 
 function sendEmail(){
 
-let consigli="";
+// 🔥 Generazione consigli SEMPRE attiva
+let consigli = `
+In base alla tua attività (${lead.attivita}) e all'obiettivo (${lead.tipo}),
+ti consigliamo una struttura digitale progettata per massimizzare conversioni e autorevolezza.
 
-let tipo = lead.tipo.toLowerCase();
-let budget = lead.budget.toLowerCase();
+Con il budget indicato (${lead.budget}) possiamo sviluppare una soluzione strategica
+ottimizzata per crescita, acquisizione clienti e posizionamento online.
+`;
 
-if(tipo.includes("vetrina")){
-consigli += "Ti consigliamo una landing page professionale con recensioni e WhatsApp diretto. ";
-}
+// 👇 DEBUG (non cancellarlo per ora)
+console.log("Consigli inviati:", consigli);
 
-if(tipo.includes("clienti") || tipo.includes("vendite")){
-consigli += "Ti consigliamo una struttura orientata alla conversione con funnel e raccolta contatti. ";
-}
-
-if(tipo.includes("ecommerce") || tipo.includes("shop")){
-consigli += "Ti consigliamo un e-commerce ottimizzato con checkout semplice. ";
-}
-
-if(budget.includes("basso")){
-consigli += "Possiamo partire con una soluzione essenziale ma strategica.";
-}
-
-if(budget.includes("medio")){
-consigli += "Possiamo integrare SEO base e strategia di acquisizione clienti.";
-}
-
-if(budget.includes("alto")){
-consigli += "Possiamo sviluppare un sistema completo con automazioni marketing.";
-}
-
-if(consigli===""){
-consigli="Ti consigliamo una consulenza personalizzata per definire la strategia migliore.";
-}
-
-const params={
-nome:lead.nome,
-attivita:lead.attivita,
-tipo:lead.tipo,
-budget:lead.budget,
-email:lead.email,
-consigli:consigli
+const params = {
+  nome: lead.nome,
+  attivita: lead.attivita,
+  tipo: lead.tipo,
+  budget: lead.budget,
+  email: lead.email,
+  consigli: consigli
 };
 
-emailjs.send("service_b2z4mkb","template_zydfl5j",params)
-.then(function(){
-console.log("Email inviata correttamente ✅");
+emailjs.send("service_b2z4mkb","template_zydfl5j", params)
+.then(function(response){
+  console.log("Email inviata ✅", response.status);
 })
 .catch(function(error){
-console.log("Errore email:",error);
+  console.log("Errore email ❌", error);
 });
+
 }
 const params={
 nome:lead.nome,
@@ -735,6 +715,7 @@ if(e.key==="Enter") sendMessage();
 
 </body>
 </html>
+
 
 
 
