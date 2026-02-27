@@ -647,25 +647,23 @@ addMessage("Scrivimi se vuoi altre informazioni 🚀","bot");
 
 function sendEmail(){
 
-// 🔥 Generazione consigli SEMPRE attiva
-let consigli = `
-In base alla tua attività (${lead.attivita}) e all'obiettivo (${lead.tipo}),
-ti consigliamo una struttura digitale progettata per massimizzare conversioni e autorevolezza.
+// 🔥 Creo il testo consigli in modo diretto
+const consigli = "In base alla tua attività (" + lead.attivita + 
+") e al tipo di sito richiesto (" + lead.tipo + 
+"), ti consigliamo una struttura digitale progettata per aumentare conversioni e autorevolezza. " +
+"Con il budget indicato (" + lead.budget + 
+") possiamo sviluppare una soluzione strategica su misura.";
 
-Con il budget indicato (${lead.budget}) possiamo sviluppare una soluzione strategica
-ottimizzata per crescita, acquisizione clienti e posizionamento online.
-`;
-
-// 👇 DEBUG (non cancellarlo per ora)
-console.log("Consigli inviati:", consigli);
+// 👇 Debug per vedere se esiste davvero
+console.log("VALORE CONSIGLI:", consigli);
 
 const params = {
-  nome: lead.nome,
-  attivita: lead.attivita,
-  tipo: lead.tipo,
-  budget: lead.budget,
-  email: lead.email,
-  consigli: consigli
+  nome: String(lead.nome),
+  attivita: String(lead.attivita),
+  tipo: String(lead.tipo),
+  budget: String(lead.budget),
+  email: String(lead.email),
+  consigli: String(consigli)
 };
 
 emailjs.send("service_b2z4mkb","template_zydfl5j", params)
@@ -715,6 +713,7 @@ if(e.key==="Enter") sendMessage();
 
 </body>
 </html>
+
 
 
 
