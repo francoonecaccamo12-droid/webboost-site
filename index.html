@@ -649,35 +649,35 @@ function sendEmail(){
 
 let consigli="";
 
-// 🔥 Analisi tipo sito
-if(lead.tipo.toLowerCase().includes("vetrina")){
-consigli += "Ti consigliamo una landing page professionale con recensioni, mappa e WhatsApp diretto. ";
+let tipo = lead.tipo.toLowerCase();
+let budget = lead.budget.toLowerCase();
+
+if(tipo.includes("vetrina")){
+consigli += "Ti consigliamo una landing page professionale con recensioni e WhatsApp diretto. ";
 }
 
-if(lead.tipo.toLowerCase().includes("clienti")){
-consigli += "Ti consigliamo una struttura orientata alla conversione con call to action forti e raccolta contatti. ";
+if(tipo.includes("clienti") || tipo.includes("vendite")){
+consigli += "Ti consigliamo una struttura orientata alla conversione con funnel e raccolta contatti. ";
 }
 
-if(lead.tipo.toLowerCase().includes("ecommerce")){
-consigli += "Ti consigliamo un e-commerce ottimizzato con pagine prodotto persuasive e checkout semplificato. ";
+if(tipo.includes("ecommerce") || tipo.includes("shop")){
+consigli += "Ti consigliamo un e-commerce ottimizzato con checkout semplice. ";
 }
 
-// 🔥 Analisi budget
-if(lead.budget.toLowerCase().includes("basso")){
-consigli += "Possiamo partire con una soluzione essenziale ma strategica per generare risultati rapidi.";
+if(budget.includes("basso")){
+consigli += "Possiamo partire con una soluzione essenziale ma strategica.";
 }
 
-if(lead.budget.toLowerCase().includes("medio")){
-consigli += "Possiamo integrare SEO base e una strategia di acquisizione clienti.";
+if(budget.includes("medio")){
+consigli += "Possiamo integrare SEO base e strategia di acquisizione clienti.";
 }
 
-if(lead.budget.toLowerCase().includes("alto")){
-consigli += "Possiamo sviluppare un sistema completo con funnel marketing e automazioni email.";
+if(budget.includes("alto")){
+consigli += "Possiamo sviluppare un sistema completo con automazioni marketing.";
 }
 
-// fallback sicurezza
 if(consigli===""){
-consigli="Ti consigliamo una soluzione personalizzata studiata sui tuoi obiettivi specifici.";
+consigli="Ti consigliamo una consulenza personalizzata per definire la strategia migliore.";
 }
 
 const params={
@@ -735,6 +735,7 @@ if(e.key==="Enter") sendMessage();
 
 </body>
 </html>
+
 
 
 
