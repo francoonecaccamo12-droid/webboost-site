@@ -22,6 +22,7 @@ body{
 background:#050507;
 color:white;
 overflow-x:hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* ================= INTRO ================= */
@@ -396,6 +397,85 @@ cursor:pointer;
 font-weight:600;
 width:100%;
 }
+  /* ================= MOBILE OPTIMIZATION ================= */
+
+@media (max-width: 768px){
+
+/* Navbar */
+.navbar{
+padding:15px 5%;
+flex-direction:column;
+gap:10px;
+}
+
+.nav-links{
+gap:15px;
+justify-content:center;
+}
+
+/* Sezioni */
+section{
+padding:100px 6% 70px 6%;
+}
+
+/* Intro */
+.intro{
+padding:20px;
+}
+
+.hero-title{
+font-size:28px;
+}
+
+.sub{
+font-size:15px;
+}
+
+/* Cards e box */
+.card,
+.chi-box,
+.method-step{
+padding:25px;
+}
+
+/* Chatbot mobile */
+#chatbot{
+width:95%;
+right:2.5%;
+bottom:90px;
+height:70vh;
+border-radius:18px;
+}
+
+#chat-toggle{
+width:55px;
+height:55px;
+font-size:22px;
+}
+
+#chat-input{
+font-size:16px; /* evita zoom automatico su iPhone */
+}
+
+/* Instagram button */
+.instagram{
+width:48px;
+height:48px;
+}
+}
+
+/* Extra piccoli (es: iPhone SE) */
+@media (max-width: 400px){
+
+.hero-title{
+font-size:22px;
+}
+
+.section-title{
+font-size:22px;
+}
+
+}
 </style>
 </head>
 
@@ -705,6 +785,7 @@ if(e.key==="Enter") sendMessage();
 
 </body>
 </html>
+
 
 
 
