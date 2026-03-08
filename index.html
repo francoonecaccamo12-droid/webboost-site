@@ -1,796 +1,924 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WebBoost Italia</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
-<!-- EMAILJS -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-background:#050507;
-color:white;
-overflow-x:hidden;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* ================= INTRO ================= */
-
-.intro{
-position:fixed;
-width:100%;
-height:100vh;
-background:radial-gradient(circle at 20% 30%, #1a1400, #000 70%);
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-text-align:center;
-padding:30px 20px;
-transition:opacity 1s ease, visibility 1s ease;
-z-index:1000;
-}
-
-.intro.hide{
-opacity:0;
-visibility:hidden;
-}
-
-.hero-title{
-font-size:clamp(28px,6vw,64px);
-font-weight:800;
-max-width:1000px;
-line-height:1.2;
-}
-
-.cursor{
-display:inline-block;
-width:3px;
-height:clamp(30px,6vw,70px);
-background:#facc15;
-margin-left:8px;
-animation:blink 1s infinite;
-vertical-align:bottom;
-}
-
-@keyframes blink{
-50%{opacity:0;}
-}
-
-.sub{
-margin-top:30px;
-color:#cbd5e1;
-font-size:clamp(15px,3vw,20px);
-max-width:600px;
-opacity:0;
-transform:translateY(30px);
-transition:1s ease;
-}
-
-.sub.show{
-opacity:1;
-transform:translateY(0);
-}
-
-.btn{
-margin-top:50px;
-padding:16px 40px;
-background:#facc15;
-color:black;
-font-weight:600;
-border:none;
-border-radius:50px;
-cursor:pointer;
-transition:.4s;
-box-shadow:0 0 30px rgba(250,204,21,0.6);
-font-size:15px;
-}
-
-.btn:hover{
-transform:scale(1.05);
-box-shadow:0 0 60px rgba(250,204,21,1);
-}
-
-/* ================= MAIN ================= */
-
-.main{
-opacity:0;
-transform:translateY(60px);
-transition:1.4s ease;
-}
-
-.main.show{
-opacity:1;
-transform:translateY(0);
-}
-
-/* NAVBAR */
-
-.navbar{
-position:fixed;
-top:0;
-width:100%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 8%;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(12px);
-z-index:100;
-}
-
-.nav-links{
-display:flex;
-gap:30px;
-flex-wrap:wrap;
-}
-
-.nav-links a{
-color:white;
-text-decoration:none;
-font-size:14px;
-position:relative;
-}
-
-.nav-links a:after{
-content:"";
-position:absolute;
-width:0;
-height:2px;
-background:#facc15;
-left:0;
-bottom:-5px;
-transition:.3s;
-}
-
-.nav-links a:hover:after{
-width:100%;
-}
-
-/* SECTIONS */
-
-section{
-padding:140px 8% 100px 8%;
-}
-
-.section-title{
-font-size:clamp(26px,5vw,44px);
-margin-bottom:40px;
-}
-
-.fade{
-opacity:0;
-transform:translateY(50px);
-transition:1s ease;
-}
-
-.fade.visible{
-opacity:1;
-transform:translateY(0);
-}
-
-/* CHI SIAMO */
-
-.chi-section p{
-margin-bottom:20px;
-font-size:clamp(14px,3.2vw,18px);
-color:#cbd5e1;
-line-height:1.7;
-}
-
-.chi-lead{
-font-size:clamp(16px,4vw,22px);
-color:white;
-margin-bottom:30px;
-}
-
-.highlight{
-color:#facc15;
-text-shadow:0 0 15px rgba(250,204,21,0.5);
-}
-
-.chi-values{
-margin-top:40px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-}
-
-.chi-box{
-background:#0f0f15;
-padding:30px;
-border-radius:20px;
-border:1px solid rgba(255,255,255,0.05);
-transition:.4s;
-}
-
-.chi-box:hover{
-transform:translateY(-8px);
-border-color:#facc15;
-}
-
-/* SERVIZI */
-
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-}
-
-.card{
-background:#0f0f15;
-padding:35px;
-border-radius:20px;
-border:1px solid rgba(255,255,255,0.05);
-transition:.4s;
-}
-
-.card:hover{
-transform:translateY(-10px);
-border-color:#facc15;
-}
-
-/* METODO */
-
-.method-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-}
-
-.method-step{
-background:#0f0f15;
-padding:40px 25px;
-border-radius:20px;
-border:1px solid rgba(255,255,255,0.05);
-position:relative;
-transition:.4s;
-}
-
-.method-step:hover{
-transform:translateY(-10px);
-border-color:#facc15;
-}
-
-.step-number{
-font-size:60px;
-font-weight:800;
-color:#facc15;
-opacity:0.15;
-position:absolute;
-top:15px;
-right:20px;
-}
-
-/* CONTACT */
-
-.contact-box{
-background:#0f0f15;
-padding:50px 25px;
-border-radius:20px;
-text-align:center;
-}
-
-.contact-box a{
-color:#facc15;
-text-decoration:none;
-font-weight:600;
-}
-
-/* INSTAGRAM */
-
-.instagram{
-position:fixed;
-bottom:20px;
-left:20px;
-width:55px;
-height:55px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-background:white;
-box-shadow:0 0 25px rgba(0,0,0,0.4);
-z-index:9998;
-}
-
-.instagram svg{
-width:24px;
-height:24px;
-}
-
-/* ================= CHATBOT ================= */
-
-#chat-toggle{
-position:fixed;
-bottom:20px;
-right:20px;
-width:60px;
-height:60px;
-background:#facc15;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:26px;
-cursor:pointer;
-box-shadow:0 0 20px rgba(250,204,21,0.6);
-z-index:9999;
-}
-
-#chatbot{
-position:fixed;
-bottom:100px;
-right:20px;
-width:340px;
-height:480px;
-background:#0f0f15;
-border-radius:20px;
-display:none;
-flex-direction:column;
-overflow:hidden;
-box-shadow:0 0 30px rgba(0,0,0,0.4);
-z-index:9999;
-}
-
-#chat-header{
-background:#facc15;
-color:black;
-padding:15px;
-font-weight:600;
-text-align:center;
-}
-
-#chat-messages{
-flex:1;
-padding:15px;
-overflow-y:auto;
-font-size:14px;
-color:white;
-}
-
-.message{margin-bottom:10px;}
-.user{text-align:right;color:#facc15;}
-.bot{text-align:left;color:#cbd5e1;}
-.typing{opacity:.6;font-style:italic;}
-
-#chat-input-area{
-display:flex;
-border-top:1px solid #222;
-}
-
-#chat-input{
-flex:1;
-padding:12px;
-border:none;
-outline:none;
-background:#111;
-color:white;
-}
-
-#chat-input-area button{
-padding:12px;
-border:none;
-background:#facc15;
-color:black;
-font-weight:600;
-cursor:pointer;
-}
-
-.copy-btn{
-margin-top:10px;
-padding:8px;
-background:#facc15;
-border:none;
-cursor:pointer;
-font-weight:600;
-width:100%;
-}
-  /* ================= MOBILE OPTIMIZATION ================= */
-
-@media (max-width: 768px){
-
-/* Navbar */
-.navbar{
-padding:15px 5%;
-flex-direction:column;
-gap:10px;
-}
-
-.nav-links{
-gap:15px;
-justify-content:center;
-}
-
-/* Sezioni */
-section{
-padding:100px 6% 70px 6%;
-}
-
-/* Intro */
-.intro{
-padding:20px;
-}
-
-.hero-title{
-font-size:28px;
-}
-
-.sub{
-font-size:15px;
-}
-
-/* Cards e box */
-.card,
-.chi-box,
-.method-step{
-padding:25px;
-}
-
-/* Chatbot mobile */
-#chatbot{
-width:95%;
-right:2.5%;
-bottom:90px;
-height:70vh;
-border-radius:18px;
-}
-
-#chat-toggle{
-width:55px;
-height:55px;
-font-size:22px;
-}
-
-#chat-input{
-font-size:16px; /* evita zoom automatico su iPhone */
-}
-
-/* Instagram button */
-.instagram{
-width:48px;
-height:48px;
-}
-}
-
-/* Extra piccoli (es: iPhone SE) */
-@media (max-width: 400px){
-
-.hero-title{
-font-size:22px;
-}
-
-.section-title{
-font-size:22px;
-}
-
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WebbooStItalia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #050810;
+      --surface: #0d1117;
+      --surface2: #131929;
+      --accent: #00e5ff;
+      --accent2: #7c3aed;
+      --accent3: #f97316;
+      --text: #e8eaf0;
+      --text-muted: #6b7280;
+      --glow: rgba(0, 229, 255, 0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* CUSTOM CURSOR */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, width 0.2s, height 0.2s, background 0.2s;
+      mix-blend-mode: difference;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--accent);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s ease, width 0.2s, height 0.2s, opacity 0.2s;
+      opacity: 0.5;
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9990;
+      opacity: 0.4;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      backdrop-filter: blur(20px);
+      background: rgba(5,8,16,0.7);
+      border-bottom: 1px solid rgba(0,229,255,0.08);
+    }
+    .logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .logo-text span { color: var(--accent3); -webkit-text-fill-color: var(--accent3); }
+    nav ul { list-style: none; display: flex; gap: 2.5rem; }
+    nav a {
+      font-size: 0.85rem; font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: color 0.3s;
+      position: relative;
+    }
+    nav a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 1px; background: var(--accent);
+      transform: scaleX(0); transition: transform 0.3s;
+    }
+    nav a:hover { color: var(--accent); }
+    nav a:hover::after { transform: scaleX(1); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      padding: 6rem 3rem 3rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 50%, rgba(0,229,255,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 80% 30%, rgba(124,58,237,0.1) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 50% 80%, rgba(249,115,22,0.06) 0%, transparent 70%);
+    }
+    .grid-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridMove 20s linear infinite;
+    }
+    @keyframes gridMove {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(60px); }
+    }
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(60px); animation: orbFloat 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .orb1 { width: 300px; height: 300px; background: rgba(0,229,255,0.08); top: 10%; left: 5%; animation-delay: 0s; }
+    .orb2 { width: 400px; height: 400px; background: rgba(124,58,237,0.1); top: 30%; right: 5%; animation-delay: -3s; }
+    .orb3 { width: 200px; height: 200px; background: rgba(249,115,22,0.08); bottom: 10%; left: 40%; animation-delay: -5s; }
+    @keyframes orbFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+    .hero-content { position: relative; text-align: center; max-width: 800px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 100px; padding: 0.4rem 1rem;
+      font-size: 0.78rem; font-weight: 500;
+      color: var(--accent); letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 2rem;
+      animation: fadeInDown 0.8s ease forwards; opacity: 0;
+    }
+    .badge-dot {
+      width: 6px; height: 6px; background: var(--accent);
+      border-radius: 50%; animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
+    }
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 800; line-height: 1;
+      letter-spacing: -0.03em;
+      animation: fadeInUp 0.9s ease 0.2s forwards; opacity: 0;
+    }
+    .hero-title .line1 { display: block; color: var(--text); }
+    .hero-title .line2 {
+      display: block;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 50%, var(--accent3) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientShift 4s ease infinite, fadeInUp 0.9s ease 0.2s forwards;
+    }
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .hero-sub {
+      font-size: 1.1rem; font-weight: 300;
+      color: var(--text-muted); line-height: 1.7;
+      max-width: 500px; margin: 1.5rem auto 2.5rem;
+      animation: fadeInUp 0.9s ease 0.4s forwards; opacity: 0;
+    }
+    .hero-cta {
+      display: inline-flex; gap: 1rem;
+      animation: fadeInUp 0.9s ease 0.6s forwards; opacity: 0;
+    }
+    .btn-primary {
+      padding: 0.9rem 2.2rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; font-weight: 600; font-size: 0.9rem;
+      border: none; border-radius: 100px;
+      text-decoration: none; cursor: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 30px rgba(0,229,255,0.2);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(0,229,255,0.35); }
+    .btn-outline {
+      padding: 0.9rem 2.2rem; background: transparent;
+      color: var(--text); font-weight: 500; font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px; text-decoration: none; cursor: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SECTIONS */
+    section { padding: 7rem 3rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 600;
+      color: var(--accent); text-transform: uppercase;
+      letter-spacing: 0.15em; margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-label::before {
+      content: ''; display: inline-block;
+      width: 30px; height: 1px; background: var(--accent);
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.02em; margin-bottom: 1.5rem;
+    }
+
+    /* CHI SIAMO */
+    #chi-siamo { background: var(--bg); }
+    .chi-siamo-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .chi-siamo-text p {
+      color: var(--text-muted); line-height: 1.8;
+      font-size: 1.05rem; margin-bottom: 1.2rem;
+    }
+    .stats-row { display: flex; gap: 2rem; margin-top: 2.5rem; }
+    .stat { text-align: left; }
+    .stat-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem; }
+    .team-visual {
+      position: relative; background: var(--surface2);
+      border: 1px solid rgba(0,229,255,0.1);
+      border-radius: 24px; padding: 2.5rem; overflow: hidden;
+    }
+    .team-visual::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(0,229,255,0.08), transparent 60%);
+    }
+    .team-members { display: flex; flex-direction: column; gap: 1rem; position: relative; }
+    .member {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.8rem 1rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .member:hover { border-color: rgba(0,229,255,0.3); transform: translateX(5px); }
+    .member-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.85rem; color: #000; flex-shrink: 0;
+    }
+    .member-info .name { font-weight: 600; font-size: 0.9rem; }
+    .member-info .role { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* COSA PROPONIAMO */
+    #cosa-proponiamo { background: var(--surface); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .service-card {
+      background: var(--surface2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px; padding: 2rem;
+      position: relative; overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      cursor: none;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0); transition: transform 0.4s;
+    }
+    .service-card:hover { transform: translateY(-8px); border-color: rgba(0,229,255,0.2); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 50px; height: 50px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1.2rem;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.15);
+    }
+    .service-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 700; margin-bottom: 0.7rem;
+    }
+    .service-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+    .service-tag {
+      display: inline-block; margin-top: 1.2rem;
+      padding: 0.3rem 0.8rem;
+      background: rgba(0,229,255,0.06);
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 100px;
+      font-size: 0.72rem; color: var(--accent);
+      font-weight: 500; letter-spacing: 0.05em;
+    }
+
+    /* CONTATTACI */
+    #contattaci { background: var(--bg); }
+    .contact-wrapper {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start; margin-top: 3rem;
+    }
+    .contact-info p {
+      color: var(--text-muted); line-height: 1.8; font-size: 1rem; margin-bottom: 2rem;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      background: var(--surface2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px; margin-bottom: 1rem;
+      transition: border-color 0.3s;
+      text-decoration: none; color: var(--text);
+    }
+    .contact-item:hover { border-color: rgba(0,229,255,0.3); }
+    .contact-item-icon {
+      width: 40px; height: 40px; background: rgba(0,229,255,0.08);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .contact-item-text .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .contact-item-text .value { font-weight: 500; font-size: 0.95rem; }
+    .contact-visual {
+      background: var(--surface2);
+      border: 1px solid rgba(0,229,255,0.1);
+      border-radius: 24px; padding: 2.5rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .contact-visual::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(0,229,255,0.08), transparent 70%);
+    }
+    .big-email {
+      font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700;
+      color: var(--accent); word-break: break-all; position: relative;
+    }
+    .mailto-btn {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      margin-top: 1.5rem; padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #000; font-weight: 700; font-size: 0.9rem;
+      border-radius: 100px; text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 30px rgba(0,229,255,0.2); cursor: none;
+    }
+    .mailto-btn:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(0,229,255,0.4); }
+
+    /* FOOTER */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 2.5rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-logo {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .footer-copy { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* INSTAGRAM BUTTON */
+    .ig-btn {
+      position: fixed; bottom: 2rem; left: 2rem;
+      width: 54px; height: 54px; border-radius: 50%;
+      background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(221,42,123,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+      z-index: 200; cursor: none;
+    }
+    .ig-btn:hover { transform: scale(1.1) rotate(-5deg); box-shadow: 0 8px 35px rgba(221,42,123,0.6); }
+    .ig-btn svg { width: 26px; height: 26px; fill: white; }
+
+    /* CHAT BUTTON */
+    .chat-btn {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 25px rgba(0,229,255,0.35);
+      cursor: none; transition: transform 0.3s, box-shadow 0.3s; z-index: 200;
+      position: fixed;
+    }
+    .chat-btn:hover { transform: scale(1.1); box-shadow: 0 8px 40px rgba(0,229,255,0.5); }
+    .chat-btn svg { width: 28px; height: 28px; fill: #000; }
+    .chat-btn .notif {
+      position: absolute; top: -2px; right: -2px;
+      width: 14px; height: 14px; background: var(--accent3);
+      border-radius: 50%; border: 2px solid var(--bg);
+      animation: pulse 2s infinite;
+    }
+
+    /* CHAT WIDGET */
+    .chat-widget {
+      position: fixed; bottom: 5.5rem; right: 2rem;
+      width: 370px; background: var(--surface);
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,229,255,0.05);
+      z-index: 199; overflow: hidden;
+      display: none; flex-direction: column; max-height: 500px;
+      transform: translateY(20px) scale(0.95); opacity: 0;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s;
+    }
+    .chat-widget.open { display: flex; transform: translateY(0) scale(1); opacity: 1; }
+    .chat-header {
+      background: linear-gradient(135deg, rgba(0,229,255,0.12), rgba(124,58,237,0.12));
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 1rem 1.2rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .bot-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .bot-info .bot-name { font-weight: 700; font-size: 0.9rem; }
+    .bot-info .bot-status { font-size: 0.72rem; color: #4ade80; }
+    .chat-close {
+      margin-left: auto; background: none; border: none;
+      color: var(--text-muted); cursor: none; font-size: 1.2rem;
+      transition: color 0.2s;
+    }
+    .chat-close:hover { color: var(--text); }
+    .chat-messages {
+      flex: 1; overflow-y: auto; padding: 1rem;
+      display: flex; flex-direction: column; gap: 0.8rem;
+      scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent;
+    }
+    .msg {
+      max-width: 85%; padding: 0.7rem 1rem;
+      border-radius: 16px; font-size: 0.87rem; line-height: 1.5;
+      animation: msgIn 0.3s ease forwards;
+    }
+    @keyframes msgIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .msg.bot {
+      background: var(--surface2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-bottom-left-radius: 4px; align-self: flex-start;
+    }
+    .msg.user {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #000; font-weight: 500;
+      border-bottom-right-radius: 4px; align-self: flex-end;
+    }
+    .typing {
+      display: flex; gap: 4px; padding: 0.8rem 1rem;
+      background: var(--surface2); border-radius: 16px;
+      border-bottom-left-radius: 4px;
+      align-self: flex-start; width: fit-content;
+    }
+    .typing span {
+      width: 6px; height: 6px; background: var(--text-muted);
+      border-radius: 50%; animation: bounce 1.2s ease infinite;
+    }
+    .typing span:nth-child(2) { animation-delay: 0.15s; }
+    .typing span:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-6px); }
+    }
+    .chat-input-area {
+      display: flex; gap: 0.5rem; padding: 0.8rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .chat-input {
+      flex: 1; background: var(--surface2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px; padding: 0.6rem 1rem;
+      color: var(--text); font-size: 0.87rem;
+      font-family: 'DM Sans', sans-serif;
+      outline: none; transition: border-color 0.2s;
+    }
+    .chat-input:focus { border-color: rgba(0,229,255,0.3); }
+    .chat-send {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: none; flex-shrink: 0; transition: transform 0.2s;
+    }
+    .chat-send:hover { transform: scale(1.1); }
+    .chat-send svg { width: 16px; height: 16px; fill: #000; }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* DIVIDER */
+    .divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,229,255,0.2), transparent);
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { display: none; }
+      section { padding: 5rem 1.5rem; }
+      .chi-siamo-grid, .contact-wrapper { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .stats-row { gap: 1.5rem; }
+      .chat-widget { width: calc(100vw - 2rem); right: 1rem; bottom: 5rem; }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="intro" id="intro">
-<h1 class="hero-title" id="typewriter"></h1>
-<div class="cursor"></div>
-<p class="sub" id="subtitle">
-Siti web e infrastrutture digitali progettate per generare conversioni reali.
-</p>
-<button class="btn" onclick="enterSite()">Inizia Ora</button>
-</div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
-<div class="main" id="main">
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo-text">Webboost<span>Italia</span></div>
+    <ul>
+      <li><a href="#chi-siamo">Chi siamo</a></li>
+      <li><a href="#cosa-proponiamo">Servizi</a></li>
+      <li><a href="#contattaci">Contatti</a></li>
+    </ul>
+  </nav>
 
-<div class="navbar">
-<div><strong>WebBoost Italia</strong></div>
-<div class="nav-links">
-<a href="#chi">Chi siamo</a>
-<a href="#servizi">Servizi</a>
-<a href="#metodo">Metodo</a>
-<a href="#contatti">Contatti</a>
-</div>
-</div>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="grid-bg"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Sviluppo Web · Design · Crescita Digitale
+      </div>
+      <h1 class="hero-title">
+        <span class="line1">Il tuo sito web</span>
+        <span class="line2">parte da qui.</span>
+      </h1>
+      <p class="hero-sub">Diamo a ogni attività la presenza online che merita. Giovani, appassionati, concreti.</p>
+      <div class="hero-cta">
+        <a href="#contattaci" class="btn-primary">Inizia il tuo progetto →</a>
+        <a href="#chi-siamo" class="btn-outline">Scopri chi siamo</a>
+      </div>
+    </div>
+  </section>
 
-<section id="chi" class="fade chi-section">
-<h2 class="section-title">Chi siamo</h2>
+  <div class="divider"></div>
 
-<p class="chi-lead">
-Progettiamo ecosistemi digitali per aziende che vogliono 
-<strong class="highlight">trasformare traffico in fatturato</strong>.
-</p>
+  <!-- CHI SIAMO -->
+  <section id="chi-siamo">
+    <div class="section-inner">
+      <div class="chi-siamo-grid">
+        <div class="chi-siamo-text">
+          <div class="section-label reveal">Chi siamo</div>
+          <h2 class="section-title reveal reveal-delay-1">Giovani sviluppatori,<br/>grande missione.</h2>
+          <p class="reveal reveal-delay-2">Siamo un gruppo di giovani developer italiani uniti da un obiettivo comune: <strong>aiutare chi non ha ancora un sito web</strong> a fare il salto digitale.</p>
+          <p class="reveal reveal-delay-3">Crediamo che ogni attività, grande o piccola, meriti una presenza online professionale. Lavoriamo con energia, passione e attenzione al dettaglio per realizzare soluzioni su misura — senza complicazioni e senza costi esorbitanti.</p>
+          <div class="stats-row reveal reveal-delay-4">
+            <div class="stat">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Passione italiana</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">∞</div>
+              <div class="stat-label">Idee creative</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">0</div>
+              <div class="stat-label">Burocrazia inutile</div>
+            </div>
+          </div>
+        </div>
+        <div class="team-visual reveal reveal-delay-2">
+          <div class="team-members">
+            <div class="member">
+              <div class="member-avatar">FD</div>
+              <div class="member-info">
+                <div class="name">Frontend Developer</div>
+                <div class="role">UI / UX · React · Design</div>
+              </div>
+            </div>
+            <div class="member">
+              <div class="member-avatar">BD</div>
+              <div class="member-info">
+                <div class="name">Backend Developer</div>
+                <div class="role">Node.js · Database · API</div>
+              </div>
+            </div>
+            <div class="member">
+              <div class="member-avatar">DX</div>
+              <div class="member-info">
+                <div class="name">Digital Strategist</div>
+                <div class="role">SEO · Analytics · Growth</div>
+              </div>
+            </div>
+            <div class="member">
+              <div class="member-avatar">MO</div>
+              <div class="member-info">
+                <div class="name">Mobile & Web Dev</div>
+                <div class="role">App · Performance · PWA</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<p>
-Non realizziamo semplici siti web, ma strutture strategiche orientate alla crescita.
-</p>
+  <div class="divider"></div>
 
-<div class="chi-values">
-<div class="chi-box">
-<h3>Visione Strategica</h3>
-<p>Ogni scelta è guidata da obiettivi chiari.</p>
-</div>
-<div class="chi-box">
-<h3>Performance</h3>
-<p>Design pensato per convertire.</p>
-</div>
-<div class="chi-box">
-<h3>Ottimizzazione</h3>
-<p>Miglioramento continuo dei risultati.</p>
-</div>
-</div>
-</section>
+  <!-- COSA PROPONIAMO -->
+  <section id="cosa-proponiamo">
+    <div class="section-inner">
+      <div class="section-label reveal">Cosa proponiamo</div>
+      <h2 class="section-title reveal reveal-delay-1">Soluzioni digitali<br/>fatte per crescere.</h2>
+      <div class="services-grid">
 
-<section id="servizi" class="fade">
-<h2 class="section-title">Servizi</h2>
-<div class="cards">
-<div class="card">
-<h3>Web Design Strategico</h3>
-<p>Piattaforme ad alto impatto orientate alla conversione.</p>
-</div>
-<div class="card">
-<h3>Landing & Funnel</h3>
-<p>Percorsi digitali ottimizzati per trasformare traffico in clienti.</p>
-</div>
-<div class="card">
-<h3>Brand Positioning</h3>
-<p>Costruiamo autorità nel mercato digitale.</p>
-</div>
-</div>
-</section>
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-icon">🎨</div>
+          <h3>Siti Web su Misura</h3>
+          <p>Design moderno, responsive e veloce. Creiamo la tua vetrina digitale da zero, con un'identità visiva unica e professionale.</p>
+          <span class="service-tag">Design · HTML · CSS</span>
+        </div>
 
-<section id="metodo" class="fade">
-<h2 class="section-title">Il Metodo</h2>
-<div class="method-grid">
-<div class="method-step">
-<div class="step-number">01</div>
-<h3>Analisi</h3>
-<p>Studio approfondito di mercato e target.</p>
-</div>
-<div class="method-step">
-<div class="step-number">02</div>
-<h3>Progettazione</h3>
-<p>Costruzione strategica orientata ai risultati.</p>
-</div>
-<div class="method-step">
-<div class="step-number">03</div>
-<h3>Ottimizzazione</h3>
-<p>Miglioramento continuo delle performance.</p>
-</div>
-</div>
-</section>
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-icon">📱</div>
+          <h3>App Web & Mobile</h3>
+          <p>Dalla landing page all'applicazione completa. Sviluppiamo soluzioni web progressive che funzionano su qualsiasi dispositivo.</p>
+          <span class="service-tag">React · PWA · Mobile</span>
+        </div>
 
-<section id="contatti" class="fade">
-<h2 class="section-title">Contattaci</h2>
-<div class="contact-box">
-<p>Scrivici per iniziare il tuo progetto digitale.</p>
-<br>
-<a href="mailto:webboostitalia1@gmail.com">
-webboostitalia1@gmail.com
-</a>
-</div>
-</section>
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-icon">🔍</div>
+          <h3>SEO & Visibilità</h3>
+          <p>Essere online non basta: bisogna essere trovati. Ottimizziamo il tuo sito per scalare i risultati di Google e portare traffico reale.</p>
+          <span class="service-tag">SEO · Analytics · ADS</span>
+        </div>
 
-</div>
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-icon">⚡</div>
+          <h3>Ottimizzazione & Velocità</h3>
+          <p>Un sito lento perde clienti. Ottimizziamo le performance per garantire tempi di caricamento rapidissimi e un'esperienza fluida.</p>
+          <span class="service-tag">Performance · Core Web Vitals</span>
+        </div>
 
-<a href="https://www.instagram.com/webboostitalia"
-target="_blank"
-rel="noopener noreferrer"
-class="instagram">
-<svg viewBox="0 0 24 24" fill="none">
-<path d="M7 2C4.2 2 2 4.2 2 7V17C2 19.8 4.2 22 7 22H17C19.8 22 22 19.8 22 17V7C22 4.2 19.8 2 17 2H7Z" stroke="url(#grad)" stroke-width="2"/>
-<circle cx="12" cy="12" r="4" stroke="url(#grad)" stroke-width="2"/>
-<circle cx="17" cy="7" r="1.5" fill="url(#grad)"/>
-<defs>
-<linearGradient id="grad" x1="0" y1="0" x2="24" y2="24">
-<stop stop-color="#feda75"/>
-<stop offset="0.5" stop-color="#d62976"/>
-<stop offset="1" stop-color="#962fbf"/>
-</linearGradient>
-</defs>
-</svg>
-</a>
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-icon">🤝</div>
+          <h3>Supporto Continuo</h3>
+          <p>Non sparisci dopo la consegna. Siamo sempre disponibili per aggiornamenti, modifiche e assistenza tecnica post-lancio.</p>
+          <span class="service-tag">Assistenza · Manutenzione</span>
+        </div>
 
-<!-- ================= CHATBOT ================= -->
+      </div>
+    </div>
+  </section>
 
-<div id="chat-toggle" onclick="toggleChat()">💬</div>
+  <div class="divider"></div>
 
-<div id="chatbot">
-<div id="chat-header">Consulente WebBoost</div>
-<div id="chat-messages">
-<div class="message bot">Ciao 👋 Partiamo dal tuo nome?</div>
-</div>
-<div id="chat-input-area">
-<input type="text" id="chat-input" placeholder="Scrivi qui...">
-<button onclick="sendMessage()">Invia</button>
-</div>
-</div>
-<script>
+  <!-- CONTATTACI -->
+  <section id="contattaci">
+    <div class="section-inner">
+      <div class="section-label reveal">Contattaci</div>
+      <h2 class="section-title reveal reveal-delay-1">Parlaci del tuo<br/>progetto.</h2>
+      <div class="contact-wrapper">
+        <div class="contact-info reveal reveal-delay-2">
+          <p>Hai un'attività senza sito web? Vuoi rinnovare la tua presenza online? Scrivici: risponderemo entro 24 ore con idee e un preventivo senza impegno.</p>
+          <a href="mailto:webboostitalia1@gmail.com" class="contact-item">
+            <div class="contact-item-icon">✉️</div>
+            <div class="contact-item-text">
+              <div class="label">Email diretta</div>
+              <div class="value">webboostitalia1@gmail.com</div>
+            </div>
+          </a>
+          <a href="https://www.instagram.com/webboostitalia" target="_blank" class="contact-item">
+            <div class="contact-item-icon">📸</div>
+            <div class="contact-item-text">
+              <div class="label">Instagram</div>
+              <div class="value">@webboostitalia</div>
+            </div>
+          </a>
+        </div>
+        <div class="contact-visual reveal reveal-delay-3">
+          <div style="font-size:3rem;margin-bottom:1rem;">📬</div>
+          <div class="big-email">webboostitalia1@gmail.com</div>
+          <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.8rem;line-height:1.6;">Clicca il pulsante per scriverci direttamente dalla tua email. Siamo sempre pronti ad ascoltarti!</p>
+          <a href="mailto:webboostitalia1@gmail.com" class="mailto-btn">
+            <span>✉</span> Invia una Email
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-/* ================= EMAILJS INIT ================= */
-(function(){
-emailjs.init("Ag5wRtOXoekEbTCvw");
-})();
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">WebbooStItalia</div>
+    <div class="footer-copy">© 2025 WebbooStItalia · Tutti i diritti riservati</div>
+  </footer>
 
-/* ================= TYPEWRITER ================= */
-const text="Progettiamo ecosistemi digitali che generano crescita reale";
-let i=0;
-function typeWriter(){
-if(i<text.length){
-document.getElementById("typewriter").innerHTML+=text[i];
-i++;
-setTimeout(typeWriter,35);
-}else{
-document.getElementById("subtitle").classList.add("show");
-}}
-typeWriter();
+  <!-- INSTAGRAM BUTTON -->
+  <a href="https://www.instagram.com/webboostitalia" target="_blank" class="ig-btn" title="Seguici su Instagram">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+    </svg>
+  </a>
 
-function enterSite(){
-document.getElementById("intro").classList.add("hide");
-document.getElementById("main").classList.add("show");
-}
+  <!-- CHAT BUTTON -->
+  <button class="chat-btn" id="chatBtn" title="Chatta con noi">
+    <div class="notif"></div>
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+    </svg>
+  </button>
 
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add("visible");
-}
-});
-},{threshold:0.2});
+  <!-- CHAT WIDGET -->
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-header">
+      <div class="bot-avatar">🤖</div>
+      <div class="bot-info">
+        <div class="bot-name">Assistente WebbooSt</div>
+        <div class="bot-status">● Online ora</div>
+      </div>
+      <button class="chat-close" id="chatClose">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input-area">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Scrivi un messaggio..."/>
+      <button class="chat-send" id="chatSend">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
 
-document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
+  <script>
+    // CURSOR
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+    });
+    (function animateRing() {
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animateRing);
+    })();
 
-/* ================= CHATBOT ================= */
+    // SCROLL REVEAL
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    reveals.forEach(r => observer.observe(r));
 
-let step=0;
-let lead={};
+    // CHAT
+    const chatBtn = document.getElementById('chatBtn');
+    const chatWidget = document.getElementById('chatWidget');
+    const chatClose = document.getElementById('chatClose');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const chatSend = document.getElementById('chatSend');
 
-function toggleChat(){
-const c=document.getElementById("chatbot");
-c.style.display=c.style.display==="flex"?"none":"flex";
-}
+    let chatOpen = false;
+    let step = 0;
+    let userData = { name: '', activity: '', budget: '', email: '' };
+    const steps = [
+      { key: 'name',     q: '👋 Ciao! Sono il bot di WebbooStItalia. Come ti chiami?' },
+      { key: 'activity', q: 'Piacere! Che tipo di attività svolgi o vorresti aprire?' },
+      { key: 'budget',   q: 'Che budget hai a disposizione per il sito web? (es: "300€", "500-1000€", "non so ancora")' },
+      { key: 'email',    q: 'Perfetto! Inserisci la tua email così ti invio dei consigli personalizzati 📧' }
+    ];
 
-function addMessage(text,type){
-const chat=document.getElementById("chat-messages");
-const div=document.createElement("div");
-div.classList.add("message",type);
-div.innerHTML=text;
-chat.appendChild(div);
-chat.scrollTop=chat.scrollHeight;
-}
+    function addMsg(text, type = 'bot') {
+      return new Promise(resolve => {
+        if (type === 'bot') {
+          const typing = document.createElement('div');
+          typing.className = 'typing';
+          typing.innerHTML = '<span></span><span></span><span></span>';
+          chatMessages.appendChild(typing);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+          setTimeout(() => {
+            typing.remove();
+            const msg = document.createElement('div');
+            msg.className = 'msg bot';
+            msg.textContent = text;
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            resolve();
+          }, 900);
+        } else {
+          const msg = document.createElement('div');
+          msg.className = 'msg user';
+          msg.textContent = text;
+          chatMessages.appendChild(msg);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+          resolve();
+        }
+      });
+    }
 
-function typing(callback){
-const chat=document.getElementById("chat-messages");
-const t=document.createElement("div");
-t.classList.add("message","bot","typing");
-t.textContent="Sta scrivendo...";
-chat.appendChild(t);
-chat.scrollTop=chat.scrollHeight;
-setTimeout(()=>{chat.removeChild(t);callback();},800);
-}
+    chatBtn.addEventListener('click', () => {
+      chatOpen = !chatOpen;
+      if (chatOpen) {
+        chatWidget.style.display = 'flex';
+        setTimeout(() => chatWidget.classList.add('open'), 10);
+        const notif = chatBtn.querySelector('.notif');
+        if (notif) notif.remove();
+        if (step === 0 && chatMessages.children.length === 0) {
+          setTimeout(() => addMsg(steps[0].q), 300);
+        }
+      } else {
+        chatWidget.classList.remove('open');
+        setTimeout(() => { chatWidget.style.display = 'none'; }, 300);
+      }
+    });
 
-function sendMessage(){
-const input=document.getElementById("chat-input");
-const text=input.value.trim();
-if(!text) return;
-addMessage(text,"user");
-input.value="";
-typing(()=>logic(text));
-}
+    chatClose.addEventListener('click', () => {
+      chatOpen = false;
+      chatWidget.classList.remove('open');
+      setTimeout(() => { chatWidget.style.display = 'none'; }, 300);
+    });
 
-function logic(text){
+    async function handleSend() {
+      const val = chatInput.value.trim();
+      if (!val) return;
+      chatInput.value = '';
+      if (step < steps.length) {
+        await addMsg(val, 'user');
+        userData[steps[step].key] = val;
+        step++;
+        if (step < steps.length) {
+          await addMsg(steps[step].q);
+        } else {
+          await addMsg('Ottimo! Sto elaborando i tuoi dati e preparo i consigli personalizzati per te... ✨');
+          await sendAdviceEmail();
+        }
+      }
+    }
 
-if(step===0){
-lead.nome=text;
-addMessage("Perfetto "+text+" 👍 Che attività hai?","bot");
-step=1;return;
-}
+    chatSend.addEventListener('click', handleSend);
+    chatInput.addEventListener('keydown', e => { if (e.key === 'Enter') handleSend(); });
 
-if(step===1){
-lead.attivita=text;
-addMessage("Vuoi un sito vetrina o uno che generi clienti?","bot");
-step=2;return;
-}
+    async function sendAdviceEmail() {
+      try {
+        const prompt = `Sei un consulente web italiano di WebbooStItalia. Un potenziale cliente ha fornito queste informazioni:
+- Nome: ${userData.name}
+- Tipo di attività: ${userData.activity}
+- Budget: ${userData.budget}
+- Email: ${userData.email}
 
-if(step===2){
-lead.tipo=text;
-addMessage("Indicativamente che budget hai in mente?","bot");
-step=3;return;
-}
+Scrivi una email in italiano, professionale ma amichevole, con consigli personalizzati su:
+1. Che tipo di sito web sarebbe ideale per la sua attività
+2. Le funzionalità consigliate in base al budget
+3. Perché WebbooStItalia è la scelta giusta
+4. Un invito a contattarci a webboostitalia1@gmail.com
 
-if(step===3){
-lead.budget=text;
-addMessage("Perfetto 🔥 Lasciami la tua email.","bot");
-step=4;return;
-}
+La email deve iniziare con "Ciao ${userData.name}," e finire con i saluti di WebbooStItalia. Tono giovane e professionale.`;
 
-if(step===4){
-lead.email=text;
-sendEmail();   // 👈 QUI INVIA EMAIL
-showSummary();
-step=5;return;
-}
-
-addMessage("Scrivimi se vuoi altre informazioni 🚀","bot");
-}
-
-/* ================= INVIO EMAIL ================= */
-
-function sendEmail(){
-
-// 🔥 Creo il testo consigli in modo diretto
-const consigli = "In base alla tua attività (" + lead.attivita + 
-") e al tipo di sito richiesto (" + lead.tipo + 
-"), ti consigliamo una struttura digitale progettata per aumentare conversioni e autorevolezza. " +
-"Con il budget indicato (" + lead.budget + 
-") possiamo sviluppare una soluzione strategica su misura.";
-
-// 👇 Debug per vedere se esiste davvero
-console.log("VALORE CONSIGLI:", consigli);
-
-const params = {
-  nome: String(lead.nome),
-  attivita: String(lead.attivita),
-  tipo: String(lead.tipo),
-  budget: String(lead.budget),
-  email: String(lead.email),
-  consigli: String(consigli)
-};
-
-emailjs.send("service_b2z4mkb","template_zydfl5j", params)
-.then(function(response){
-  console.log("Email inviata ✅", response.status);
-})
-.catch(function(error){
-  console.log("Errore email ❌", error);
-});
-}
-
-
-/* ================= RIEPILOGO ================= */
-
-function showSummary(){
-let summary=`Grazie ${lead.nome} 🙌<br><br>
-Controlla la tua email 📩<br>
-Ti abbiamo inviato i prossimi step personalizzati.<br><br>
-<button class="copy-btn" onclick="copyLead()">Copia Lead</button>`;
-addMessage(summary,"bot");
-}
-
-function copyLead(){
-const text=`Nuovo Lead WebBoost:
-Nome: ${lead.nome}
-Attività: ${lead.attivita}
-Tipo: ${lead.tipo}
-Budget: ${lead.budget}
-Email: ${lead.email}`;
-navigator.clipboard.writeText(text);
-alert("Lead copiato negli appunti ✅");
-}
-
-document.getElementById("chat-input").addEventListener("keypress",function(e){
-if(e.key==="Enter") sendMessage();
-});
-
-</script>
-
+        const res = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 1000,
+            messages: [{ role: 'user', content: prompt }]
+          })
+        });
+        const data = await res.json();
+        const emailText = data.content?.map(b => b.text || '').join('') || '';
+        const adviceShort = emailText.slice(0, 300) + '...';
+        await addMsg('Ecco un\'anteprima dei consigli per te:\n\n' + adviceShort);
+        await addMsg('📧 Sto aprendo il tuo client email con i consigli completi!');
+        const subject = encodeURIComponent('I tuoi consigli personalizzati da WebbooStItalia 🚀');
+        const body = encodeURIComponent(emailText);
+        window.open(`mailto:${userData.email}?subject=${subject}&body=${body}`);
+        await addMsg('✅ Tutto fatto! Controlla la tua email. Per qualsiasi domanda scrivici a webboostitalia1@gmail.com 🎉');
+      } catch (e) {
+        await addMsg('⚠️ Piccolo intoppo tecnico! Contattaci direttamente a webboostitalia1@gmail.com e ti risponderemo subito con consigli personalizzati!');
+      }
+    }
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
